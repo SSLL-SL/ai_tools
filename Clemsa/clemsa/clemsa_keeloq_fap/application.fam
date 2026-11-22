@@ -1,0 +1,7 @@
+App(
+    appid = "clemsa_keeloq",
+    name = "Clemsa Mutancode",
+    apptype = FlipperAppType.EXTERNAL,
+    entry_point = "clemsa_keeloq_app",
+    fap_version = [1, 0],
+)

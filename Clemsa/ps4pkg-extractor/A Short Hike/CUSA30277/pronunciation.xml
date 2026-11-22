@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gamePackage>
+  <language id="00" modified="0">
+    <speechRecognitionWords>
+      <text display="1">ア ショート ハイク</text>
+      <pronunciation>a ___ sh oL t o ___ h a i k u</pronunciation>
+    </speechRecognitionWords>
+  </language>
+  <language id="01" modified="0">
+    <speechRecognitionWords>
+      <text display="1">A Short Hike</text>
+      <pronunciation>ax ___ sh ao t ___ hh ay k</pronunciation>
+    </speechRecognitionWords>
+  </language>
+  <language id="18" modified="0">
+    <speechRecognitionWords>
+      <text display="1">A Short Hike</text>
+      <pronunciation>ax ___ sh ao t ___ hh ay k</pronunciation>
+    </speechRecognitionWords>
+  </language>
+</gamePackage>

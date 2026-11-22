@@ -1,0 +1,398 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\spanishdeactivate{<>}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\geometry{margin=2.2cm,headheight=14pt}
+\definecolor{navy}{HTML}{17324D}
+\definecolor{blue}{HTML}{246B9F}
+\definecolor{lightblue}{HTML}{EAF3F8}
+\definecolor{lightgray}{HTML}{F3F5F7}
+\definecolor{darkgray}{HTML}{46515C}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=blue,pdftitle={Guía de resolución: Plataform@}}
+\pagestyle{fancy}\fancyhf{}
+\lhead{\textcolor{darkgray}{Guía de resolución}}
+\rhead{\textcolor{darkgray}{Plataform@}}
+\cfoot{\thepage}
+\titleformat{\section}{\Large\bfseries\color{navy}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{blue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{navy}}{\thesubsubsection}{0.6em}{}
+\setlist[itemize]{leftmargin=1.3em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+\newcommand{\key}[1]{\textbf{\textcolor{navy}{#1}}}
+\newcommand{\boxnote}[1]{\begin{center}\fcolorbox{blue}{lightblue}{\parbox{0.92\textwidth}{#1}}\end{center}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{document}
+\begin{titlepage}
+\centering\vspace*{2cm}
+{\Large\textcolor{darkgray}{PREPARACIÓN DE OPOSICIONES}}\\[1.2cm]
+{\Huge\bfseries\textcolor{navy}{Plataform@}}\\[0.25cm]
+{\Large Plataforma Digital de Cooperación entre Administraciones Públicas}\\[1.5cm]
+{\large Guía de resolución del supuesto práctico}\\[2cm]
+\begin{tikzpicture}
+\node[draw=blue,rounded corners=8pt,fill=lightblue,inner sep=16pt,text width=9cm,align=center] {\large
+Cooperación institucional + expediente electrónico\\[2pt]
+Reuniones + votación + conocimiento + datos};
+\end{tikzpicture}
+\vfill
+\begin{minipage}{0.82\textwidth}\small\centering
+Material de estudio elaborado a partir del supuesto práctico de la XXVIII convocatoria.\\
+Las decisiones propuestas deben justificarse y adaptarse a la normativa y arquitectura disponible.
+\end{minipage}\vspace{1cm}
+\end{titlepage}
+
+\tableofcontents\newpage
+
+\section{Estrategia de resolución}
+
+El supuesto pide diseñar una plataforma para soportar la cooperación entre AGE, comunidades autónomas y entidades locales. No es únicamente un gestor documental ni una herramienta de videoconferencia: es un \key{espacio electrónico de trabajo institucional}, con órganos jerárquicos, reglas internas parametrizables, reuniones, acuerdos, votaciones, custodia y explotación de información.
+
+Las ideas que deben recorrer toda la respuesta son:
+\begin{itemize}
+\item \key{Parametrización}: cada Conferencia, Comisión o Grupo de trabajo tiene reglamento, roles, quórums, flujos y plantillas propios.
+\item \key{Evidencia jurídica}: convocatoria, asistentes, orden del día, deliberación, votación, acuerdos, acta, firma, certificación y publicación deben quedar trazados.
+\item \key{Confidencialidad por espacio y documento}: la pertenencia a una Administración no autoriza a consultar toda la plataforma.
+\item \key{Interoperabilidad}: acceso desde Internet y SARA, integración con identidad, firma, notificaciones, Registro, Portal de Transparencia, data lake y servicios de videoconferencia.
+\item \key{MVP realista}: en seis meses debe permitir gestionar reuniones y documentación de un conjunto piloto, aunque la solución completa tarde dos años.
+\end{itemize}
+
+\subsection{Distribución orientativa del tiempo}
+\begin{center}
+\begin{tabularx}{0.92\textwidth}{l r Y}\toprule
+\textbf{Bloque} & \textbf{Tiempo} & \textbf{Objetivo}\\\midrule
+Lectura y supuestos & 15 min & Actores, artículos, volumen, presupuesto y fechas.\\
+Modelo lógico & 45 min & Dominios, interfaces y diagrama.\\
+Tecnología & 30 min & Productos, arquitectura y decisiones.\\
+Votación y videoconferencia & 25 min & Funcionalidades críticas y garantías.\\
+Sistemas, seguridad y datos & 45 min & Dimensionamiento, ENS, data lake y transparencia.\\
+Planificación y contratación & 35 min & MVP, cronograma, recursos y procedimiento.\\
+Revisión & 5 min & Verificar que se responden los ocho apartados.\\\bottomrule
+\end{tabularx}\end{center}
+
+\boxnote{\key{Supuesto de partida}: 50 Conferencias, 1.500--2.000 usuarios, aproximadamente 292 reuniones anuales, 13 GB documentales iniciales y 15.000 registros jurídicos. La dimensión no es masiva; la complejidad principal está en la seguridad, la flexibilidad normativa, la validez de las decisiones y la integración institucional.}
+
+\section{1. Modelo lógico de Plataform@}
+
+\subsection{1.a. Módulos principales}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,node distance=5mm and 7mm]
+\tikzset{actor/.style={draw=navy,fill=lightgray,rounded corners,align=center,minimum height=8mm},app/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=3.0cm,minimum height=9mm},data/.style={draw=darkgray,fill=white,rounded corners,align=center,text width=4.1cm,minimum height=9mm},arrow/.style={-stealth,thick,blue}}
+\node[actor] (users) {AGE · CCAA · EELL\\usuarios externos};
+\node[app,below=of users] (access) {Portal, identidad y autorizaciones};
+\node[app,below=of access] (org) {Órganos, espacios y miembros};
+\node[app,left=of org] (meeting) {Reuniones y expediente};
+\node[app,right=of org] (vote) {Votación, acuerdos y delegación};
+\node[app,below=of org] (docs) {Documentos, actas, firma y custodia};
+\node[app,left=of docs] (video) {Videoconferencia y medios electrónicos};
+\node[app,right=of docs] (knowledge) {Convenios, legislación y jurisprudencia};
+\node[app,below=of docs] (search) {Búsqueda, informes y cuadros de mando};
+\node[data,below=of search] (data) {Repositorio documental · datos operacionales · auditoría · data lake};
+\draw[arrow] (users)--(access); \draw[arrow] (access)--(org);
+\draw[arrow] (org)--(meeting); \draw[arrow] (org)--(vote); \draw[arrow] (meeting)--(docs);
+\draw[arrow] (vote)--(docs); \draw[arrow] (video)--(meeting); \draw[arrow] (knowledge)--(search);
+\draw[arrow] (docs)--(search); \draw[arrow] (search)--(data); \draw[arrow] (docs)--(data);
+\end{tikzpicture}\end{center}
+
+\subsection{1.b. Descripción, interfaces e integración}
+
+\subsubsection{1. Portal, identidad y autorizaciones}
+Portal web responsive y accesible, usable desde Internet y SARA. Se integra con Cl@ve, identidad corporativa, certificados y federación de identidades de las Administraciones. El modelo combina RBAC y ABAC: perfil, Administración, órgano, espacio, documento, estado y vigencia.
+
+\subsubsection{2. Órganos, espacios y miembros}
+Modelo jerárquico: plataforma, Conferencia, Comisión Sectorial, Comisión Bilateral, Comisión Territorial, Grupo de trabajo y otros órganos. La Secretaría configura miembros, presidencia, secretaría, invitados, puntos de contacto, reglas, plantillas y permisos.
+
+\subsubsection{3. Reuniones y expediente electrónico}
+Gestiona convocatoria, iniciativa, solicitud por un tercio, orden del día, carácter consultivo/decisorio/de coordinación, documentación, asistentes, quórum, modalidad presencial o virtual, tareas, acuerdos, acta, certificación y seguimiento.
+
+\subsubsection{4. Documentos, firma y archivo}
+Repositorio con metadatos, versiones, estados, clasificación, firma electrónica, sellado de tiempo, custodia, retención y transferencia al archivo. Los documentos pueden estar restringidos a miembros, ser visibles después de la sesión o publicables en transparencia.
+
+\subsubsection{5. Votaciones, decisiones y seguimiento}
+Configura votación por representación administrativa, mayorías, quórum, voto particular, acuerdo, recomendación y plan conjunto. Cada decisión queda vinculada a la reunión, asunto, resultado, votos, acta y tareas de seguimiento.
+
+\subsubsection{6. Videoconferencia y medios electrónicos}
+Integra una plataforma autorizada de videoconferencia o un servicio institucional, con control de acceso, lista de asistentes, unidad de acto, grabación opcional, transcripción y emisión pública cuando proceda. La grabación no sustituye al acta.
+
+\subsubsection{7. Conocimiento jurídico}
+Catálogo de convenios, legislación AGE/CCAA, reparto competencial y jurisprudencia, con especial atención al Tribunal Constitucional. Incluye carga, actualización, relaciones, fuentes, vigencia, búsqueda y enlaces oficiales.
+
+\subsubsection{8. Búsqueda, informes y cuadros de mando}
+Índice de texto completo y filtros por órgano, materia, Administración, fecha, estado y nivel de acceso. Cuadros sobre reuniones, asistencia, acuerdos, cumplimiento, grupos activos, tiempos y actividad.
+
+\subsubsection{9. Transparencia y datos}
+Publicación selectiva, anonimización o supresión de información reservada, exportación a formatos reutilizables, APIs y cargas al data lake de la AGE. Debe aplicarse una política de publicación por tipo de documento y estado.
+
+\subsubsection{10. Administración, auditoría y configuración}
+Administración delegada por órgano, parametrización sin desarrollo, catálogo de plantillas y workflows, monitorización, auditoría de acceso y cambios, gestión de incidencias y configuración técnica.
+
+\subsection{Interfaces principales}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}\toprule
+\textbf{Interfaz} & \textbf{Finalidad} & \textbf{Garantías}\\\midrule
+Identidad/firma & Acceso, firma de actas, acuerdos y certificados. & Certificados, Cl@ve, federación, validación y sello de tiempo.\\
+Calendario/notificaciones & Convocatorias, recordatorios y comunicaciones. & Integridad, destinatarios, trazabilidad y plazos.\\
+Videoconferencia & Sesiones remotas y unidad de acto. & Acceso autorizado, continuidad, evidencias y configuración de grabación.\\
+Archivo/registro & Custodia, conservación y expedientes. & Metadatos, integridad, retención y transferencia.\\
+Portal de Transparencia & Publicación selectiva. & Revisión, anonimización, versión publicada y retirada controlada.\\
+Data lake/BI & Estadística y análisis transversal. & Copias anonimizadas, catálogo, calidad y gobierno del dato.\\
+\bottomrule\end{tabularx}\end{center}
+
+\section{2. Solución tecnológica}
+
+\subsection{Arquitectura de aplicación}
+
+Se propone una arquitectura modular orientada a servicios, con un núcleo transaccional común y servicios de colaboración desacoplados. No conviene crear un microservicio por cada entidad; el tamaño y la criticidad aconsejan dominios bien delimitados, despliegue automatizado y complejidad controlada.
+
+\begin{itemize}
+\item Frontend web responsive, accesible y multilingüe.
+\item API Gateway y APIs versionadas.
+\item Servicios de órganos, reuniones, documentos, votación, conocimiento y transparencia.
+\item Motor configurable de workflow y reglas por órgano.
+\item Gestión documental y archivo electrónico.
+\item Bus de eventos para notificaciones, auditoría y exportaciones.
+\item Base relacional para metadatos y transacciones; almacenamiento de objetos para documentos, audio y vídeo.
+\item Índice de búsqueda y réplica analítica.
+\end{itemize}
+
+\subsection{Decisiones y alternativas}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}\toprule
+\textbf{Decisión} & \textbf{Propuesta} & \textbf{Justificación}\\\midrule
+Aplicación & Modular, con servicios de dominio. & Flexibilidad sin el coste de microservicios excesivos.\\
+Persistencia & Relacional + objetos + búsqueda. & Consistencia de expedientes y eficiencia documental.\\
+Integración & APIs REST y eventos. & Interoperabilidad y desacoplamiento.\\
+Workflow & Motor parametrizable. & Cada reglamento requiere reglas distintas.\\
+Videoconferencia & Servicio institucional existente o componente especializado. & Menor riesgo que desarrollar comunicaciones en tiempo real.\\
+Identidad & Servicios comunes de Administración digital. & Reutilización y confianza jurídica.\\
+\bottomrule\end{tabularx}\end{center}
+
+Se evita el monolito rígido porque dificultaría adaptar reglamentos, y se evita una fragmentación extrema porque complicaría la transaccionalidad, la operación y la trazabilidad de las sesiones.
+
+\section{3. Votación y medios electrónicos}
+
+\subsection{3.a. Votación y delegación del voto}
+
+La votación debe configurarse como parte del expediente de la reunión, no como una encuesta independiente.
+
+\subsubsection{Preparación}
+La Secretaría define asunto, carácter de la decisión, texto, opciones, fecha de apertura y cierre, quórum, regla de mayoría, peso de cada representación si el reglamento lo prevé, posibilidad de voto particular y si se admite delegación.
+
+\subsubsection{Acreditación y quórum}
+El sistema obtiene los miembros convocados, representantes válidos, suplencias y delegaciones vigentes. Antes de votar calcula quórum y deja constancia de la unidad de acto y de las personas conectadas o presentes.
+
+\subsubsection{Delegación}
+La delegación debe ser expresa, firmada o autenticada, limitada a un órgano y periodo o asunto, y revocable hasta el cierre de la votación. El sistema impide doble voto, controla incompatibilidades y conserva delegante, delegado, alcance, fecha y evidencia.
+
+\subsubsection{Emisión y cierre}
+Cada representante emite un voto autenticado. Según el reglamento, el voto puede ser nominal o reservado; nunca se debe prometer secreto si el marco jurídico exige identificar la posición. El cierre genera hash del resultado, acta de votación y evidencia firmada.
+
+\subsubsection{Resultado}
+Se calcula resultado conforme a las reglas parametrizadas: acuerdo, recomendación, plan conjunto, voto particular o no adopción. El Secretario certifica el resultado y se genera tarea de seguimiento con responsables, plazos e indicadores.
+
+\boxnote{\key{Principio}: la plataforma no decide jurídicamente qué es válido. Ejecuta reglas configuradas por el reglamento del órgano, muestra advertencias y conserva evidencia para que la Secretaría y la Presidencia puedan validar la decisión.}
+
+\subsection{3.b. Videoconferencias y medios electrónicos}
+
+\begin{itemize}
+\item Reserva de sala virtual asociada a la reunión y generación de enlace de un solo uso o sesión controlada.
+\item Acceso desde navegador, móvil y sistemas compatibles, sin exigir instalación innecesaria.
+\item Identificación previa, sala de espera, control de micrófono, turno de palabra y expulsión por moderación.
+\item Registro de asistentes, incidencias técnicas y momento de incorporación o abandono.
+\item Integración con orden del día para abrir asuntos y votaciones.
+\item Grabación, si está autorizada, cifrada, con acceso limitado, plazo de conservación y trazabilidad.
+\item Transcripción asistida como borrador; revisión humana antes de incorporarla al expediente.
+\item Emisión pública solo cuando el órgano lo autorice y se haya revisado la información confidencial.
+\end{itemize}
+
+La videoconferencia no sustituye los requisitos de convocatoria, quórum, deliberación, votación, acta y certificación. La plataforma debe disponer de alternativa ante caída del servicio y de un protocolo de contingencia.
+
+\section{4. Sistemas y comunicaciones}
+
+\subsection{Arquitectura física}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,node distance=5mm]
+\tikzset{layer/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=10cm,minimum height=9mm},arrow/.style={-stealth,thick,blue}}
+\node[layer] (users) {Usuarios AGE, CCAA, EELL y dispositivos móviles};
+\node[layer,below=of users] (edge) {Internet / Red SARA / CDN / WAF / balanceadores / DMZ};
+\node[layer,below=of edge] (access) {Portal / API Gateway / identidad / firma / notificaciones};
+\node[layer,below=of access] (app) {Servicios Plataform@ / workflow / votación / integración};
+\node[layer,below=of app] (data) {BD relacional / repositorio documental / objetos multimedia / búsqueda};
+\node[layer,below=of data] (analytics) {BI / data lake AGE / transparencia};
+\node[layer,below=of analytics] (ops) {Monitorización / SIEM / copias / recuperación};
+\draw[arrow] (users)--(edge)--(access)--(app)--(data)--(analytics)--(ops);
+\end{tikzpicture}\end{center}
+
+\subsection{Propia, nube o híbrida}
+
+La opción recomendada es una arquitectura híbrida en nube pública o privada administrativamente controlada, con redundancia geográfica. La escala de datos no exige una gran infraestructura dedicada, pero la disponibilidad, confidencialidad y operación justifican servicios gestionados y un entorno alternativo.
+
+\begin{itemize}
+\item CPD o nube soberana para datos, identidad, firma, archivo y servicios críticos.
+\item Nube para elasticidad, videoconferencias, transcodificación, pruebas y recuperación, si el contrato garantiza residencia, cifrado, portabilidad y auditoría.
+\item Conectividad segura desde Internet y SARA mediante WAF, VPN o canales institucionales, sin hacer depender el acceso externo de estar dentro de SARA.
+\end{itemize}
+
+\subsection{Dimensionamiento razonado}
+
+Los 13 GB actuales son modestos, pero deben dimensionarse crecimiento, versiones, copias, adjuntos, grabaciones y transcripciones. Una estimación prudente para cinco años sería:
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l r Y}\toprule
+\textbf{Recurso} & \textbf{Estimación inicial} & \textbf{Criterio}\\\midrule
+Usuarios nominales & 2.000 & Margen frente a 1.500--2.000 usuarios.\\
+Concurrencia normal/pico & 200 / 500 & Reuniones y convocatorias simultáneas; validar con pruebas.\\
+Documentos operacionales & 100 GB & 13 GB iniciales, versiones, crecimiento y metadatos.\\
+Multimedia separada & 2--5 TB & Grabación opcional, retención limitada y política de ciclo de vida.\\
+Base relacional & 2 nodos HA, 4--8 vCPU, 16--32 GB RAM & Metadatos, usuarios, reuniones, votos y auditoría estructurada.\\
+Aplicación & 3--4 nodos, 4 vCPU, 8--16 GB RAM & Escalado horizontal y despliegues sin parada.\\
+Búsqueda/cola & 3 nodos pequeños & Texto completo, eventos y notificaciones.\\
+Red & 1 Gbps externo ampliable & Documentos y videoconferencia; separar multimedia.\\
+Backups & 3 copias, una fuera de línea o inmutable & RPO/RTO y protección frente a ransomware.\\\bottomrule
+\end{tabularx}\end{center}
+
+El dimensionamiento definitivo debe obtenerse con pruebas de carga. La videoconferencia, si se presta como servicio externo institucional, evita dimensionar el tráfico audiovisual dentro de Plataform@.
+
+\section{5. Confidencialidad y trazabilidad}
+
+\subsection{Clasificación documental}
+Cada órgano define niveles, por ejemplo: público, uso interno, restringido a miembros, reservado de trabajo y confidencial. La clasificación se hereda del espacio y puede elevarse para documentos concretos. Los estados podrían ser borrador, compartido, sometido a reunión, aprobado, firmado, publicado, archivado y expurgado conforme a reglas.
+
+\subsection{Medidas lógicas}
+\begin{itemize}
+\item RBAC/ABAC por Administración, órgano, cargo, espacio, expediente y estado.
+\item Mínimo privilegio, segregación entre Secretaría, Presidencia, miembros, invitados, auditoría y administración técnica.
+\item MFA y firma para actos críticos.
+\item Cifrado en tránsito y reposo; claves gestionadas y rotadas.
+\item DLP, antivirus, control de descargas y marcas de agua cuando proceda.
+\item Logs inmutables de acceso, lectura, descarga, modificación, firma, votación y publicación.
+\item Versionado, hash, sellado de tiempo y conservación del original firmado.
+\end{itemize}
+
+\subsection{Medidas organizativas y operacionales}
+\begin{itemize}
+\item Responsables ENS de información, servicio y seguridad, DPD y comité de gobierno.
+\item Procedimientos de alta/baja de miembros, revisión de permisos y gestión de delegaciones.
+\item Análisis de riesgos, auditoría periódica, formación y cláusulas de confidencialidad.
+\item Gestión de incidentes, continuidad, recuperación y pruebas de restauración.
+\item Retención y destrucción conforme a archivo, transparencia, protección de datos y régimen jurídico del documento.
+\item Revisión humana de transcripciones, publicaciones y clasificación automática.
+\end{itemize}
+
+\subsection{Relación con el ENS}
+
+Debe categorizarse formalmente el sistema según confidencialidad, integridad, disponibilidad, autenticidad y trazabilidad. Por la naturaleza institucional y la documentación potencialmente reservada, se propone inicialmente una \key{categoría MEDIA}, con confidencialidad e integridad de impacto alto en ciertos espacios. El análisis de riesgos puede justificar medidas reforzadas para órganos o documentos concretos.
+
+\section{6. Proyectos de datos}
+
+\subsection{Data lake de la AGE}
+Se publicarían conjuntos normalizados y catalogados: órganos, tipos, reuniones, fechas, materias, asistencia agregada, acuerdos, planes conjuntos, tareas y estados, siempre aplicando minimización y anonimización. Cada conjunto debe incluir propietario, definición, calidad, periodicidad, licencia, nivel de acceso y trazabilidad de origen.
+
+\subsection{Estadística y analítica}
+\begin{itemize}
+\item Actividad por Conferencia, Comisión y Grupo.
+\item Tiempo desde convocatoria hasta reunión, acta y certificación.
+\item Asistencia, quórum, votaciones y acuerdos.
+\item Seguimiento de compromisos y retrasos.
+\item Materias recurrentes y duplicidades entre órganos.
+\item Uso de documentación, búsquedas y participación territorial.
+\item Indicadores de transformación digital, accesibilidad y servicio.
+\end{itemize}
+
+Se recomienda un modelo dimensional o lakehouse con zona raw, zona curada y zona de consumo. BI no debe consultar directamente la base transaccional.
+
+\subsection{Transparencia}
+Volcado selectivo de convocatorias, órganos, normativa, acuerdos y planes conjuntos publicables. Se excluyen deliberaciones reservadas, datos personales no necesarios, documentos protegidos y borradores. La publicación debe generar una copia versionada y registrar quién la autorizó.
+
+\section{7. Planificación}
+
+\subsection{7.a. Cronograma a dos años}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}\toprule
+\textbf{Periodo} & \textbf{Actuaciones} & \textbf{Hito}\\\midrule
+Meses 1--2 & Gobierno, requisitos, órganos piloto, análisis jurídico, riesgos, datos y arquitectura. & Alcance y línea base.\\
+Meses 3--6 & Núcleo de espacios, miembros, reuniones, documentos, identidad y auditoría. & MVP en órganos piloto.\\
+Meses 7--10 & Votación, actas, firma, certificación, calendario y seguimiento. & Piloto funcional completo.\\
+Meses 11--14 & Videoconferencia, conocimiento jurídico, búsqueda y cuadros básicos. & Versión candidata.\\
+Meses 15--18 & Data lake, transparencia, multilingüismo, accesibilidad, rendimiento y continuidad. & Preproducción.\\
+Meses 19--21 & Migración, formación, pruebas de seguridad, carga y aceptación. & Go-live preparado.\\
+Meses 22--24 & Despliegue progresivo, soporte intensivo, evaluación y evolución. & Servicio consolidado.\\\bottomrule
+\end{tabularx}\end{center}
+
+\subsection{7.b. MVP de seis meses}
+
+El MVP debe demostrar el valor central con dos o tres órganos piloto:
+\begin{enumerate}
+\item Alta parametrizable de órganos, espacios, miembros, roles y puntos de contacto.
+\item Convocatoria, orden del día, calendario y notificaciones.
+\item Repositorio documental con permisos, versiones, búsqueda básica y auditoría.
+\item Reunión electrónica o híbrida con asistencia y acta básica.
+\item Firma de acta y certificación mediante servicios comunes.
+\item Seguimiento de acuerdos y tareas.
+\item Acceso desde Internet y SARA, autenticación fuerte y soporte móvil responsive.
+\item Administración, monitorización, copias, soporte y seguridad mínima ENS.
+\end{enumerate}
+
+Votación avanzada, videoconferencia integrada, grabación, jurisprudencia, data lake y transparencia pueden entrar en la primera evolución si el plazo o presupuesto son restrictivos, aunque deben quedar diseñados desde el principio.
+
+\section{8. Contratación y recursos humanos}
+
+\subsection{Equipos}
+\begin{itemize}
+\item Dirección y oficina de proyecto: jefe de proyecto, PMO, responsable jurídico y responsable de relación con órganos.
+\item Equipo funcional: expertos en cooperación, Secretaría, archivo, transparencia, protección de datos y accesibilidad.
+\item Equipo técnico: arquitectura, análisis, UX, frontend, backend, datos, integración, seguridad, DevOps y QA.
+\item Operación: sistemas, bases de datos, redes, monitorización, soporte y continuidad.
+\item Especialistas puntuales: firma/archivo, videoconferencia, lingüística, carga y seguridad.
+\end{itemize}
+
+Una estructura inicial de unas 12--16 personas equivalentes permite desarrollar el MVP, combinando medios propios y servicios externos, y ampliándose para migración, pruebas y despliegue.
+
+\subsection{Relación valorada orientativa}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l r Y}\toprule
+\textbf{Partida} & \textbf{Importe} & \textbf{Justificación}\\\midrule
+Análisis, arquitectura y diseño & 180.000 € & Requisitos, reglamentos, UX, modelo de información y seguridad.\\
+Desarrollo e integración & 520.000 € & Núcleo, workflow, documentos, identidad, firma y conectores.\\
+Videoconferencia y medios & 130.000 € & Integración, control de sesión, grabación/transcripción opcional.\\
+Datos, búsqueda y transparencia & 120.000 € & Jurídico, BI, lake, catálogo y publicación selectiva.\\
+Pruebas, seguridad y accesibilidad & 140.000 € & Rendimiento, auditoría, ENS, pentest y pruebas de usuario.\\
+Despliegue, migración y formación & 110.000 € & Pilotos, carga inicial, manuales y soporte de arranque.\\
+Dirección técnica y contingencia & 150.000 € & Gobierno, supervisión, riesgos y cambios.\\\midrule
+\textbf{Total} & \textbf{1.350.000 €} & Dentro de la dotación de desarrollo.\\\bottomrule
+\end{tabularx}\end{center}
+
+Los costes recurrentes de explotación, nube, licencias, almacenamiento multimedia y soporte deben reflejarse separadamente para la Unidad responsable de explotación, evitando esconderlos en el presupuesto de desarrollo.
+
+\subsection{Procedimiento y unidad contratante}
+
+La Unidad responsable de desarrollo debe elaborar la memoria de necesidad, insuficiencia de medios, presupuesto, requisitos y criterios. Por importe, duración, especialización e integración, la opción ordinaria sería un \key{procedimiento abierto} para un contrato de servicios de desarrollo e implantación, dividido en lotes cuando sea conveniente: núcleo, integración/seguridad y videoconferencia o datos.
+
+Puede contemplarse un acuerdo marco o sistema dinámico existente si satisface el objeto y los plazos, pero no debe forzarse esa vía. La unidad de contratación será el órgano competente del Ministerio responsable de la plataforma, con informe y coordinación de la unidad TIC, seguridad, jurídica y, en su caso, contratación centralizada.
+
+El contrato debe incluir propiedad y reutilización del código, documentación, estándares, portabilidad, niveles de servicio, seguridad, auditoría, protección de datos, reversibilidad y transferencia de conocimiento.
+
+\section{Conclusión}
+
+La solución de mayor calidad es una plataforma común parametrizable, no un portal estático. Debe convertir el ciclo de cooperación en un expediente electrónico verificable:
+\begin{center}\Large\bfseries\color{navy}
+Órgano $\rightarrow$ Espacio $\rightarrow$ Reunión $\rightarrow$ Documentos $\rightarrow$ Deliberación $\rightarrow$ Votación $\rightarrow$ Acuerdo $\rightarrow$ Acta $\rightarrow$ Certificación $\rightarrow$ Seguimiento $\rightarrow$ Transparencia
+\end{center}
+
+La arquitectura debe equilibrar reutilización y autonomía, la seguridad debe proteger especialmente la confidencialidad, y el MVP debe demostrar en seis meses la gestión completa de reuniones y documentos de órganos piloto. La innovación se incorpora después del núcleo jurídico y operativo, mediante datos, automatización, transcripción asistida, analítica y acceso inclusivo.
+
+\end{document}

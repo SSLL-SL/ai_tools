@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Tu centro multimedia para Tesla: IPTV, streaming, mapas, radio, precio de la luz y juegos retro.">
+  <title>Entretenimiento — Tu pantalla, tus reglas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="m7 2 5 5 5-5"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5m-5 10h5m10 0h5m-5-10h5"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><path d="M4.9 19.1a10 10 0 0 1 0-14.2M7.8 16.2a6 6 0 0 1 0-8.4M16.2 7.8a6 6 0 0 1 0 8.4m2.9-11.1a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-3 9h8L9 22l2-9H4z"/></symbol>
+    <symbol id="i-game" viewBox="0 0 24 24"><path d="M6.7 6h10.6a4 4 0 0 1 3.9 3.1l1 5a3 3 0 0 1-5 2.8l-2.1-2H8.9l-2.1 2a3 3 0 0 1-5-2.8l1-5A4 4 0 0 1 6.7 6Z"/><path d="M7 9v5m-2.5-2.5h5M16 11h.01M19 13h.01"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7m3.5-10a10 10 0 0 1 0 13"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM17 9l5 6m0-6-5 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m14-7-5-5-5 5m5-5v12"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2.6L20 12M4 12l2.8 5.6A7 7 0 0 0 18.4 15"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18m-2 0-.9 14H5.9L5 6m4 0V4h6v2m-5 4v6m4-6v6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7-10 10"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="m5 11 2-5h10l2 5m-16 0h18v7H3z"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v5m0-8h.01"/></symbol>
+  </svg>
+
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Entretenimiento, inicio">
+      <span class="brand-mark"><svg class="icon"><use href="#i-tv"/></svg></span>
+      <span class="brand-name">entretenimiento</span>
+    </a>
+    <div class="topbar-right">
+      <span class="top-label"><span class="live-dot"></span> HECHO PARA TESLA</span>
+      <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"><svg class="icon"><use href="#i-sun"/></svg></button>
+      <button class="button button-soft fullscreen-top" data-fullscreen><svg class="icon"><use href="#i-expand"/></svg><span>Pantalla completa</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page home-page" id="page-home">
+      <div class="section-heading">
+        <div><div class="eyebrow">EXPLORA</div><h2>Tu entretenimiento, a un toque</h2></div>
+        <label class="global-search"><svg class="icon"><use href="#i-search"/></svg><input id="global-search" type="search" placeholder="Busca canales o plataformas"><kbd>⌘ K</kbd></label>
+      </div>
+      <div class="search-results hidden" id="global-results"></div>
+
+      <div class="feature-grid" id="feature-grid">
+        <button class="feature-card feature-iptv" data-page="iptv" data-search="iptv canales lista m3u televisión" style="--accent:229,9,20">
+          <span class="feature-icon"><svg class="icon"><use href="#i-tv"/></svg></span><span class="feature-index">01 / TELEVISIÓN</span><span class="feature-title">IPTV</span><span class="feature-description">Tu lista de canales, en pantalla completa.</span><span class="feature-arrow"><svg class="icon"><use href="#i-right"/></svg></span><span class="feature-decoration"></span>
+        </button>
+        <button class="feature-card feature-streaming" data-page="streaming" data-search="streaming netflix prime video disney cine peliculas" style="--accent:159,122,234">
+          <span class="feature-icon"><svg class="icon"><use href="#i-film"/></svg></span><span class="feature-index">02 / A LA CARTA</span><span class="feature-title">Streaming</span><span class="feature-description">Tus plataformas favoritas, sin salir del coche.</span><span class="feature-arrow"><svg class="icon"><use href="#i-right"/></svg></span><span class="feature-decoration poster-stack"><i></i><i></i><i></i></span>
+        </button>
+        <button class="feature-card feature-maps" data-page="maps" data-search="mapas navegación rutas carga eléctrica cargadores coche" style="--accent:90,119,108">
+          <span class="feature-icon"><svg class="icon"><use href="#i-map"/></svg></span><span class="feature-index">03 / EXPLORA</span><span class="feature-title">Mapas</span><span class="feature-description">Mapas, rutas y puntos de carga para tu viaje.</span><span class="feature-arrow"><svg class="icon"><use href="#i-right"/></svg></span><span class="feature-decoration map-pin-decoration"><svg class="icon"><use href="#i-map"/></svg></span>
+        </button>
+        <button class="feature-card feature-radio" data-page="radio" data-search="radio emisoras música noticias deportes" style="--accent:245,146,73">
+          <span class="feature-icon"><svg class="icon"><use href="#i-radio"/></svg></span><span class="feature-index">04 / EN DIRECTO</span><span class="feature-title">Radio</span><span class="feature-description">Emisoras de aquí y de allá, siempre contigo.</span><span class="feature-arrow"><svg class="icon"><use href="#i-right"/></svg></span><span class="feature-decoration soundwave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </button>
+        <button class="feature-card feature-energy" data-page="energy" data-search="precio luz energía cargar coche tarifa" style="--accent:231,190,70">
+          <span class="feature-icon"><svg class="icon"><use href="#i-bolt"/></svg></span><span class="feature-index">05 / AHORRA</span><span class="feature-title">Precio de la luz</span><span class="feature-description">Encuentra la mejor hora para cargar.</span><span class="feature-arrow"><svg class="icon"><use href="#i-right"/></svg></span><span class="feature-decoration energy-graph"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </button>
+        <button class="feature-card feature-games" data-page="games" data-search="videojuegos retro emulador rom mando" style="--accent:63,185,232">
+          <span class="feature-icon"><svg class="icon"><use href="#i-game"/></svg></span><span class="feature-index">06 / MODO RETRO</span><span class="feature-title">Videojuegos</span><span class="feature-description">Vuelve a jugar a los clásicos.</span><span class="feature-arrow"><svg class="icon"><use href="#i-right"/></svg></span><span class="feature-decoration pixel-art">▥<br>▤</span>
+        </button>
+      </div>
+
+      <div class="home-bottom-row">
+        <div class="home-note"><span class="note-icon"><svg class="icon"><use href="#i-car"/></svg></span><div><strong>Un recordatorio importante</strong><p>El vídeo solo se puede ver con el coche parado. La seguridad va primero.</p></div></div>
+        <div class="recent-card hidden" id="recent-card"><div class="recent-head"><span>VISTO RECIENTEMENTE</span><button id="clear-recents">Borrar</button></div><div class="recent-list" id="recent-list"></div></div>
+      </div>
+      <footer class="footer"><a class="footer-brand" href="#inicio">entretenimiento</a><span>Tu pantalla. Tu contenido.</span><nav><a href="#privacidad">Privacidad</a></nav><span>© 2026 Entretenimiento</span></footer>
+    </section>
+
+    <section class="page subpage hidden" id="page-streaming" data-title="Plataformas de streaming">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button><button class="button button-soft" data-fullscreen><svg class="icon"><use href="#i-expand"/></svg> Pantalla completa</button></div>
+      <div class="page-intro"><div class="eyebrow">TODO LO QUE TE GUSTA</div><h1>Streaming <span>sin complicaciones.</span></h1><p>Accesos directos a tus plataformas. Se abren en este mismo navegador, sin salir del modo pantalla completa.</p></div>
+      <label class="page-search"><svg class="icon"><use href="#i-search"/></svg><input id="stream-search" type="search" placeholder="Buscar plataforma…"></label>
+      <div class="stream-grid" id="stream-grid"></div>
+      <p class="footnote">Entretenimiento no está afiliada a estas plataformas. Necesitas una suscripción para acceder a los servicios de pago.</p>
+    </section>
+
+    <section class="page subpage hidden" id="page-maps" data-title="Mapas online">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button></div>
+      <div class="page-intro compact-intro"><div class="eyebrow">ENCUENTRA TU CAMINO</div><h1>Mapas <span>para cada ruta.</span></h1><p>Abre mapas, planifica viajes y encuentra puntos de carga desde tus servicios favoritos.</p></div>
+      <div class="map-toolbar"><label class="page-search"><svg class="icon"><use href="#i-search"/></svg><input id="map-search" type="search" placeholder="Buscar mapa o servicio…"></label><div class="filter-pills" id="map-filters"><button class="filter-pill active" data-map-filter="all">Todos</button><button class="filter-pill" data-map-filter="navigation">Navegación</button><button class="filter-pill" data-map-filter="charging">Carga eléctrica</button></div></div>
+      <div class="map-grid" id="map-grid"></div>
+      <p class="footnote">Los enlaces abren servicios externos. La cobertura de puntos de carga y las funciones disponibles dependen de cada proveedor.</p>
+    </section>
+
+    <section class="page subpage hidden" id="page-iptv" data-title="IPTV">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button><button class="button button-soft" data-fullscreen><svg class="icon"><use href="#i-expand"/></svg> Pantalla completa</button></div>
+      <div class="page-intro compact-intro"><div class="eyebrow">TU TELEVISIÓN, A TU MANERA</div><h1>IPTV <span>en pantalla grande.</span></h1><p>Añade una lista M3U propia. Se guarda en este navegador y no se envía a ninguna cuenta.</p></div>
+      <div id="iptv-setup" class="iptv-setup">
+        <div class="setup-card">
+          <div class="setup-header"><div><span class="eyebrow">EMPIEZA EN UN MOMENTO</span><h2>Añade tu lista</h2></div><span class="lock-label">⌑ SOLO EN TU DISPOSITIVO</span></div>
+          <div class="tab-row" id="iptv-tabs"><button class="tab active" data-tab="url">Enlace M3U</button><button class="tab" data-tab="file">Archivo</button><button class="tab" data-tab="xtream">Xtream</button></div>
+          <div class="iptv-panel" data-panel="url"><input id="iptv-url" class="input" type="url" placeholder="https://proveedor.com/lista.m3u"><input id="iptv-epg-url" class="input" type="url" placeholder="Enlace de guía XMLTV (opcional)"><p class="input-help">La URL debe permitir acceso desde el navegador (CORS). Algunos proveedores bloquean esta opción.</p></div>
+          <div class="iptv-panel hidden" data-panel="file"><label class="file-drop" for="iptv-file"><span class="upload-circle"><svg class="icon"><use href="#i-upload"/></svg></span><strong id="iptv-file-name">Elige un archivo .m3u o .m3u8</strong><span>o arrástralo aquí</span></label><input id="iptv-file" class="visually-hidden" type="file" accept=".m3u,.m3u8,text/plain"><p class="input-help">El archivo y tus datos se quedan en este navegador.</p></div>
+          <div class="iptv-panel hidden" data-panel="xtream"><input id="xtream-host" class="input" type="url" placeholder="https://mi-panel.com:8080"><input id="xtream-user" class="input" autocomplete="username" placeholder="Usuario"><input id="xtream-pass" class="input" type="password" autocomplete="current-password" placeholder="Contraseña"><p class="input-help">Se genera el enlace M3U en tu navegador. El proveedor debe permitir peticiones desde aquí.</p></div>
+          <div class="form-message" id="iptv-message" role="status"></div>
+          <button class="button button-primary full-width" id="iptv-load">Cargar canales <svg class="icon"><use href="#i-right"/></svg></button>
+          <div class="setup-divider"><span>O SI PREFIERES</span></div>
+          <button class="button button-outline full-width" id="iptv-tdt"><span class="tdt-icon">◉</span> Probar lista de TDT en abierto <svg class="icon"><use href="#i-right"/></svg></button>
+          <p class="privacy-line"><svg class="icon"><use href="#i-info"/></svg> La lista y las credenciales se almacenan solo en el dispositivo. Entretenimiento no aloja canales.</p>
+        </div>
+        <aside class="setup-aside"><div class="aside-art"><div class="aside-screen"><span></span><span></span><span></span><b>TV</b></div><div class="aside-glow"></div></div><span class="eyebrow">¿YA TIENES UNA LISTA?</span><h3>Enlace, archivo<br>o credenciales.</h3><p>Importa una lista M3U o usa tus datos Xtream. Una vez cargada, filtra tus canales, marca favoritos y disfruta.</p><div class="aside-list"><span><svg class="icon"><use href="#i-check"/></svg> Se guarda en este navegador</span><span><svg class="icon"><use href="#i-check"/></svg> Busca por canal o categoría</span><span><svg class="icon"><use href="#i-check"/></svg> Compatible con guías XMLTV</span></div></aside>
+      </div>
+      <div id="iptv-player" class="iptv-player hidden">
+        <div class="player-main"><div class="video-shell"><video id="tv-video" playsinline controls></video><div class="video-empty" id="video-empty"><span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span><strong id="video-title">Elige un canal para empezar</strong><span id="video-status">La reproducción comenzará aquí</span></div><div class="player-overlay"><button class="round-control" id="video-audio" title="Alternar solo audio"><svg class="icon"><use href="#i-volume"/></svg></button><button class="round-control" id="video-fullscreen" title="Pantalla completa"><svg class="icon"><use href="#i-expand"/></svg></button></div></div>
+          <div class="player-info"><div><span class="eyebrow">EN TU LISTA</span><h2 id="now-playing">Elige un canal</h2><p id="program-now"></p></div><button class="button button-outline" id="iptv-change-list">Cambiar lista</button></div>
+        </div>
+        <aside class="channel-panel"><div class="channel-panel-head"><div><span class="eyebrow">TU TELEVISIÓN</span><h3>Canales <span class="count-pill" id="channel-count">0</span></h3></div><button class="icon-button small" id="iptv-refresh" title="Actualizar"><svg class="icon"><use href="#i-refresh"/></svg></button></div><label class="page-search channel-search"><svg class="icon"><use href="#i-search"/></svg><input id="channel-search" type="search" placeholder="Buscar canal"></label><select id="channel-group" class="input select-input"><option value="">Todos los grupos</option></select><div class="channel-list" id="channel-list"></div><div class="channel-tools"><button class="button button-soft" id="show-favs"><svg class="icon"><use href="#i-star"/></svg> Favoritos</button><button class="button button-soft" id="iptv-clear"><svg class="icon"><use href="#i-trash"/></svg> Borrar lista</button></div></aside>
+      </div>
+    </section>
+
+    <section class="page subpage hidden" id="page-radio" data-title="Radio">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button><span class="now-radio hidden" id="radio-mini"><i></i><span id="radio-mini-name">Sonando</span><button id="radio-stop-mini" title="Parar"><svg class="icon"><use href="#i-close"/></svg></button></span></div>
+      <div class="page-intro compact-intro"><div class="eyebrow">DALE AL PLAY</div><h1>Radio <span>que va contigo.</span></h1><p>Emisoras en directo. Si cambias de pantalla, la música sigue sonando.</p></div>
+      <div class="radio-now-card"><div class="radio-now-art"><span class="soundwave large"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><div class="radio-now-copy"><span class="eyebrow">AHORA SUENA</span><h2 id="radio-now-name">Elige una emisora</h2><span id="radio-now-detail">Tu próxima banda sonora está aquí.</span></div><button class="button button-outline hidden" id="radio-stop">Parar <svg class="icon"><use href="#i-close"/></svg></button></div>
+      <audio id="radio-audio" preload="none"></audio>
+      <div class="radio-toolbar"><label class="page-search"><svg class="icon"><use href="#i-search"/></svg><input id="radio-search" type="search" placeholder="Busca una emisora…"></label><div class="filter-pills" id="radio-filters"><button class="filter-pill active" data-tag="popular">Populares</button><button class="filter-pill" data-tag="favorites">★ Favoritas</button><button class="filter-pill" data-tag="news">Noticias</button><button class="filter-pill" data-tag="pop">Pop</button><button class="filter-pill" data-tag="rock">Rock</button><button class="filter-pill" data-tag="classical">Clásica</button></div></div>
+      <div class="status-line" id="radio-message" role="status"></div><div class="radio-grid" id="radio-grid"></div>
+    </section>
+
+    <section class="page subpage hidden" id="page-energy" data-title="Precio de la luz">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button></div>
+      <div class="page-intro compact-intro"><div class="eyebrow">ENERGÍA, CON CABEZA</div><h1>Precio de la luz <span>hora a hora.</span></h1><p>Encuentra el tramo más barato para cargar tu Tesla.</p></div>
+      <div class="energy-toolbar"><div class="filter-pills" id="energy-days"><button class="filter-pill active" data-day="today">Hoy</button><button class="filter-pill" data-day="tomorrow">Mañana</button></div><button class="button button-soft" id="energy-refresh"><svg class="icon"><use href="#i-refresh"/></svg> Actualizar</button></div>
+      <div class="energy-current" id="energy-current"><div><span class="eyebrow">PRECIO ACTUAL · ESPAÑA</span><strong id="current-price">—</strong><span id="current-label">Consultando el mercado…</span></div><div class="current-visual"><svg viewBox="0 0 130 72" aria-hidden="true"><path d="M2 62C20 55 24 25 42 32s21 26 37 4 20-28 31-14 11 20 18-19" fill="none" stroke="currentColor" stroke-width="3"/><path d="M2 62C20 55 24 25 42 32s21 26 37 4 20-28 31-14 11 20 18-19v69H2Z" fill="url(#chart-fill)" opacity=".15"/><defs><linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e50914"/><stop offset="1" stop-color="#e50914" stop-opacity="0"/></linearGradient></defs></svg></div></div>
+      <div class="energy-chart-wrap"><div class="energy-chart-head"><span>PRECIO PVPC · €/kWh</span><span><i class="legend-dot cheap"></i>Barato <i class="legend-dot mid"></i>Medio <i class="legend-dot expensive"></i>Caro</span></div><div class="energy-chart" id="energy-chart"></div></div>
+      <div class="charge-card"><div><span class="eyebrow">TU MEJOR FRANJA</span><h2 id="best-window">Calculando…</h2><p id="best-detail">La ventana consecutiva más económica.</p></div><label class="hours-select">Cargar durante<select id="charge-hours"><option value="2">2 horas</option><option value="3">3 horas</option><option value="4" selected>4 horas</option><option value="6">6 horas</option><option value="8">8 horas</option></select></label></div>
+      <p class="footnote" id="energy-message">Precio horario PVPC de Red Eléctrica de España, en €/kWh y sin impuestos.</p>
+    </section>
+
+    <section class="page subpage hidden" id="page-games" data-title="Videojuegos">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button></div>
+      <div class="page-intro compact-intro"><div class="eyebrow">INSERT COIN</div><h1>Modo <span>nostalgia.</span></h1><p>Tus juegos retro en la pantalla grande. Añade tus propios archivos ROM, que se guardan en tu dispositivo.</p></div>
+      <div class="games-layout"><div class="games-main"><div class="game-list-header"><div><span class="eyebrow">TU COLECCIÓN</span><h2>Mis juegos <span class="count-pill" id="game-count">0</span></h2></div><button class="button button-primary" id="add-rom"><svg class="icon"><use href="#i-plus"/></svg> Añadir ROM</button><input id="rom-file" class="visually-hidden" type="file" accept=".nes,.sfc,.smc,.md,.gen,.gb,.gbc,.gba,.iso,.pbp,.chd,.n64,.z64,.v64,.zip"></div><div class="game-empty" id="game-empty"><div class="empty-cartridge">▶</div><h3>Tu colección te espera</h3><p>Añade un archivo ROM de un juego que tengas para empezar a jugar.</p></div><div class="saved-games" id="saved-games"></div><div id="emulator-shell" class="emulator-shell hidden"><div class="emulator-top"><strong id="emulator-title">Jugando</strong><button class="icon-button small" id="close-emulator" title="Cerrar juego"><svg class="icon"><use href="#i-close"/></svg></button></div><div id="emulator" class="emulator"></div></div></div><aside class="games-aside"><div class="controller-art"><span>✦</span><svg class="icon"><use href="#i-game"/></svg><i></i></div><span class="eyebrow">LISTO PARA JUGAR</span><h3>Un mando y<br>vuelves a 1998.</h3><p>Conecta un mando USB o Bluetooth al coche. También puedes usar el teclado mientras juegas.</p><div class="console-tags"><span>NES</span><span>SNES</span><span>MEGA DRIVE</span><span>GAME BOY</span><span>GBA</span><span>PLAYSTATION</span><span>N64</span></div><p class="small-note">Solo se pueden añadir copias de juegos que poseas. El emulador se carga bajo demanda.</p></aside></div>
+    </section>
+
+    <section class="page subpage hidden" id="page-privacy" data-title="Privacidad">
+      <div class="page-top"><button class="back-button" data-back><svg class="icon"><use href="#i-left"/></svg> Inicio</button></div><div class="page-intro compact-intro"><div class="eyebrow">CLARO Y SENCILLO</div><h1>Tu privacidad <span>es tuya.</span></h1><p>La lista IPTV se procesa en tu navegador y permanece en el almacenamiento local de este dispositivo.</p></div><div class="privacy-card"><h2>Almacenamiento local</h2><p>Las listas de canales, favoritos, ROMs y preferencias se guardan en el navegador. No hay registro ni cuentas.</p><h2>Servicios externos</h2><p>Al cargar listas remotas, escuchar radios, consultar precios o abrir plataformas, el navegador se conecta directamente al servicio correspondiente. Sus políticas de privacidad se aplican a esas conexiones.</p><h2>Eliminar tus datos</h2><p>Puedes borrar la lista desde IPTV y los juegos desde Videojuegos. También puedes limpiar el almacenamiento del sitio desde los ajustes del navegador.</p></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

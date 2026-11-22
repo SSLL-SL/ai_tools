@@ -1,0 +1,368 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\spanishdeactivate{<>}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\geometry{margin=2.2cm,headheight=14pt}
+\definecolor{navy}{HTML}{17324D}
+\definecolor{blue}{HTML}{246B9F}
+\definecolor{lightblue}{HTML}{EAF3F8}
+\definecolor{lightgray}{HTML}{F3F5F7}
+\definecolor{darkgray}{HTML}{46515C}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=blue,pdftitle={Guía de resolución: Plataforma Digital Común}}
+\pagestyle{fancy}\fancyhf{}
+\lhead{\textcolor{darkgray}{Guía de resolución}}
+\rhead{\textcolor{darkgray}{Plataforma Digital Común}}
+\cfoot{\thepage}
+\titleformat{\section}{\Large\bfseries\color{navy}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{blue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{navy}}{\thesubsubsection}{0.6em}{}
+\setlist[itemize]{leftmargin=1.3em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+\newcommand{\key}[1]{\textbf{\textcolor{navy}{#1}}}
+\newcommand{\boxnote}[1]{\begin{center}\fcolorbox{blue}{lightblue}{\parbox{0.92\textwidth}{#1}}\end{center}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{document}
+\begin{titlepage}
+\centering\vspace*{2cm}
+{\Large\textcolor{darkgray}{PREPARACIÓN DE OPOSICIONES}}\\[1.2cm]
+{\Huge\bfseries\textcolor{navy}{Plataforma Digital Común}}\\[1cm]
+{\Large Guía de resolución del supuesto práctico}\\[2cm]
+\begin{tikzpicture}
+\node[draw=blue,rounded corners=8pt,fill=lightblue,inner sep=16pt,text width=9cm,align=center] {\large
+Información fiable + interoperabilidad + privacidad\\[2pt]
+Acceso ciudadano + supervisión + trazabilidad};
+\end{tikzpicture}
+\vfill
+\begin{minipage}{0.82\textwidth}\small\centering
+Material de estudio elaborado a partir del enunciado de la XXIX convocatoria.\\
+Las referencias normativas y tecnológicas deben contrastarse con la convocatoria y la normativa vigente.
+\end{minipage}\vspace{1cm}
+\end{titlepage}
+
+\tableofcontents\newpage
+
+\section{Cómo abordar el ejercicio}
+
+La PDC no debe plantearse como un sistema que sustituya a las entidades gestoras y depositarias. Su concepción inicial es la de una \key{plataforma común de información, consulta, interoperabilidad, supervisión y trazabilidad}. Las entidades aportan los datos; la plataforma los recibe, valida, integra, conserva y presenta según el perfil del usuario.
+
+La respuesta debe dejar claras cuatro decisiones:
+\begin{itemize}
+\item \key{Fuente de información}: gestoras y depositarias envían ficheros normalizados mediante EDITRAN.
+\item \key{Separación entre información general y privada}: la información privada solo se ofrece a usuarios legitimados.
+\item \key{Trazabilidad histórica}: los movimientos deben mantenerse aunque se produzcan traslados de plan.
+\item \key{Acceso sencillo y móvil}: el ciudadano necesita una experiencia usable, accesible y segura, integrada en la Sede Electrónica.
+\end{itemize}
+
+\subsection{Distribución orientativa del tiempo}
+\begin{center}
+\begin{tabularx}{0.92\textwidth}{l r Y}\toprule
+\textbf{Bloque} & \textbf{Tiempo} & \textbf{Contenido}\\\midrule
+Lectura y supuestos & 10 min & Actores, flujos, restricciones y arquitectura GISS disponible.\\
+Modelo lógico & 45 min & Dominios, interfaces, datos y diagramas.\\
+Solución tecnológica & 50 min & Arquitectura, integración EDITRAN y despliegue.\\
+Seguridad & 25 min & ENS, RGPD, autenticación y autorización.\\
+Planificación & 30 min & Cronograma, MVP y método de trabajo.\\
+Innovación & 35 min & Funcionalidades adicionales e impacto.\\
+Informe ejecutivo y revisión & 25 min & Impactos, conclusión y comprobación de respuestas.\\\bottomrule
+\end{tabularx}\end{center}
+
+\boxnote{\key{Supuesto explícito}: la PDC se integra con la Sede Electrónica de la Seguridad Social; mantiene la recepción EDITRAN existente en el entorno host y expone servicios modernos para consultas, sin modificar inicialmente los sistemas origen de las entidades.}
+
+\section{Modelo lógico de PDC}
+
+\subsection{Dominios o módulos principales}
+
+\subsubsection{1. Presentación y experiencia de usuario}
+Portal responsive y accesible, prioritariamente móvil, con información general, acceso autenticado, navegación por planes y fondos, enlaces a gestoras, reclamaciones y peticiones de protección de datos. Debe cumplir accesibilidad, lenguaje claro y diseño coherente con la Sede Electrónica.
+
+\subsubsection{2. Identidad, perfiles y autorizaciones}
+Gestiona usuarios internos y externos, entidades, representantes, apoderamientos, roles, ámbitos de actuación y vigencia de permisos. No basta con saber quién es una persona: hay que saber en nombre de qué entidad actúa y sobre qué plan, fondo o colectivo puede consultar.
+
+\subsubsection{3. Ingesta y gestión de ficheros}
+Recibe los envíos diarios EDITRAN, identifica entidad y fichero, verifica firma o certificado, registra recepción, valida formato y reglas de negocio, procesa el fichero, devuelve ACK o errores por EDITRAN y permite reenvíos controlados.
+
+\subsubsection{4. Normalización y calidad del dato}
+Transforma los formatos de origen a un modelo común. Controla duplicados, integridad referencial, fechas, importes, identificadores, planes, fondos y relaciones entre partícipes y promotores. Conserva errores, advertencias y resultado de cada carga.
+
+\subsubsection{5. Registro histórico de planes y fondos}
+Catálogo de fondos de pensiones de empleo de promoción pública abiertos, planes adscritos, gestoras, depositarias, promotores, comisiones y vigencias. Debe soportar altas, modificaciones, bajas lógicas, cambios de gestora y traslados.
+
+\subsubsection{6. Información individual}
+Consulta para partícipes y beneficiarios: aportaciones, movimientos, derechos consolidados o económicos, plan, fondo y fechas de actualización. Es un dominio de consulta, no una pantalla para que el ciudadano modifique directamente la información recibida.
+
+\subsubsection{7. Información de promotores y órganos de control}
+Consultas agregadas y detalladas para promotores, comisiones de control, Comisión de Control Especial, Comisión Promotora y de Seguimiento, DGOSS y Dirección General de Seguros y Fondos de Pensiones, siempre limitadas a su ámbito.
+
+\subsubsection{8. Supervisión, informes y cuadros de mando}
+Seguimiento de cargas, cobertura, calidad, incidencias, evolución de aportaciones, partícipes, fondos y planes. Incluye informes regulatorios y cuadros de mando para supervisión, sin permitir que las agregaciones revelen datos personales innecesarios.
+
+\subsubsection{9. Reclamaciones y derechos de protección de datos}
+Canal para presentar reclamaciones, peticiones y ejercicios de derechos. Debe registrar solicitud, identidad, plan o entidad afectada, plazos, responsable, comunicaciones y resolución, integrándose con registro y notificaciones.
+
+\subsubsection{10. Auditoría, trazabilidad y administración}
+Audita accesos, consultas, cargas, errores, cambios de configuración, asignaciones de permisos y operaciones administrativas. La administración técnica debe estar separada de la consulta funcional y sometida a doble control en operaciones sensibles.
+
+\subsection{Diagrama de arquitectura lógica}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,node distance=5mm and 6mm]
+\tikzset{actor/.style={draw=navy,fill=lightgray,rounded corners,align=center,minimum height=8mm}, app/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=3.1cm,minimum height=9mm}, data/.style={draw=darkgray,fill=white,rounded corners,align=center,text width=4.1cm,minimum height=9mm}, arrow/.style={-stealth,thick,blue}}
+\node[actor] (cit) {Ciudadanos\\partícipes y beneficiarios};
+\node[actor,right=of cit] (ent) {Gestoras y\\depositarias};
+\node[actor,right=of ent] (org) {Promotores y\\órganos de control};
+\node[app,below=of ent] (sede) {Sede Electrónica / portal móvil};
+\node[app,below=of sede] (iam) {Identidad, perfiles, roles y autorizaciones};
+\node[app,left=of iam] (editran) {Gateway EDITRAN\\ACK y errores};
+\node[app,right=of iam] (api) {APIs de consulta\\y enlaces externos};
+\node[app,below=of iam] (ing) {Ingesta, validación y normalización};
+\node[app,below=of ing] (core) {Planes, fondos, movimientos y derechos};
+\node[app,right=of core] (sup) {Supervisión, informes y BI};
+\node[data,below=of core] (store) {Base transaccional · histórico · documentos · auditoría};
+\node[actor,below=of store] (admin) {Administradores y operación};
+\draw[arrow] (cit)--(sede); \draw[arrow] (org)--(sede); \draw[arrow] (ent)--(editran);
+\draw[arrow] (ent)--(api); \draw[arrow] (sede)--(iam); \draw[arrow] (iam)--(api);
+\draw[arrow] (editran)--(ing); \draw[arrow] (ing)--(core); \draw[arrow] (core)--(sup);
+\draw[arrow] (core)--(store); \draw[arrow] (sup)--(store); \draw[arrow] (admin)--(store);
+\end{tikzpicture}\end{center}
+
+\subsection{Interfaces e integración}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}\toprule
+\textbf{Interfaz} & \textbf{Uso} & \textbf{Controles}\\\midrule
+EDITRAN & Recepción diaria de ficheros y devolución de ACK/errores. & Certificados, firma, integridad, antirrepetición, registro y cuarentena.\\
+Sede Electrónica & Acceso a información general y privada. & Integración con PGIS/Cl@ve, MFA cuando proceda, sesión segura y accesibilidad.\\
+APIs internas & Comunicación entre módulos y consultas. & TLS, autorización por scopes, versionado, límites y trazas.\\
+Fuentes externas & Enlaces a webs de gestoras y documentación detallada. & No confiar en el contenido externo; enlaces versionados y controlados.\\
+Registro/notificaciones & Reclamaciones, peticiones y comunicaciones. & Identidad, sello de tiempo, expediente y plazos.\\
+Analítica & Cuadros de mando e informes. & Réplica o modelo analítico; no consultar directamente producción para BI.\\\bottomrule
+\end{tabularx}\end{center}
+
+El flujo de carga es: recepción EDITRAN, verificación, antivirus y cuarentena, validación sintáctica, validación semántica, carga provisional, conciliación, publicación transaccional, auditoría y ACK. Si hay errores, el fichero no debe publicar parcialmente datos inconsistentes; se devuelve un informe de errores y se conserva el original.
+
+\subsection{Modelo de información}
+Entidades: persona, representante, entidad, promotor, gestora, depositaria, fondo, plan, comisión, relación de pertenencia, aportación, movimiento, derecho consolidado, derecho económico, fichero, lote de carga, error, reclamación, usuario, rol, ámbito, apoderamiento, consulta, informe y evento de auditoría.
+
+El histórico debe ser temporal: vigencia desde/hasta, origen del dato, fecha de recepción, fecha de efecto y versión. Las correcciones se registran como nuevas versiones, evitando sobrescribir sin evidencia el estado anterior.
+
+\section{Solución tecnológica}
+
+\subsection{Arquitectura propuesta}
+
+La solución recomendada es una arquitectura \key{modular y orientada a servicios}, alineada con NAUA y con las capacidades existentes de GISS. No se propone crear microservicios por cada tabla, sino servicios de dominio con límites claros:
+\begin{itemize}
+\item Portal y experiencia de usuario.
+\item Identidad y autorización.
+\item Ingesta EDITRAN y procesamiento de lotes.
+\item Catálogo de planes y fondos.
+\item Información de partícipes, beneficiarios y promotores.
+\item Supervisión y analítica.
+\item Reclamaciones y derechos.
+\end{itemize}
+
+NAUA aporta una referencia homogénea para microservicios, observabilidad, despliegue y operación. PROS@ u host se aprovecharía para la recepción EDITRAN ya existente, reduciendo riesgo y plazo. No se recomienda migrar de inmediato esa capacidad estable al nuevo stack.
+
+\subsection{Arquitectura física}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,node distance=5mm]
+\tikzset{layer/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=10cm,minimum height=9mm},arrow/.style={-stealth,thick,blue}}
+\node[layer] (users) {Usuarios: móvil, navegador, entidades y administración};
+\node[layer,below=of users] (edge) {Internet / Sede / WAF / balanceo / DMZ};
+\node[layer,below=of edge] (access) {PGIS / Cl@ve / gateway API / portal};
+\node[layer,below=of access] (svc) {Servicios NAUA / workflows / ingesta / consultas};
+\node[layer,below=of svc] (data) {BD relacional / histórico / documentos / caché};
+\node[layer,below=of data] (bi) {DWH/BI / informes / publicación controlada};
+\node[layer,below=of bi] (ops) {Monitorización / SIEM / copias / recuperación};
+\draw[arrow] (users)--(edge)--(access)--(svc)--(data)--(bi)--(ops);
+\end{tikzpicture}\end{center}
+
+Se mantienen redes y entornos separados de desarrollo, integración, pruebas, preproducción y producción. El procesamiento EDITRAN puede permanecer en el entorno host GISS, conectado mediante una interfaz controlada al dominio de ingesta.
+
+\subsection{Nube, CPD o modelo híbrido}
+
+La respuesta más sólida es un modelo híbrido: servicios críticos y datos bajo la arquitectura GISS y uso de nubes ya disponibles para cargas escalables, analítica o recuperación, siempre dentro de las condiciones de seguridad y contratación pública.
+
+\begin{itemize}
+\item \key{CPD GISS}: control institucional, integración con host/EDITRAN, continuidad y proximidad a PGIS.
+\item \key{Nube}: elasticidad, entornos bajo demanda, analítica, pruebas de carga y recuperación geográfica.
+\item \key{Condiciones}: cifrado, residencia, portabilidad, claves controladas, SLA, auditoría, gestión de proveedores y salida ordenada.
+\end{itemize}
+
+El criterio no debe ser ``nube por defecto'', sino seleccionar la ubicación según criticidad, latencia, protección de datos, escalabilidad y coste total.
+
+\subsection{Tecnologías y decisiones}
+\begin{itemize}
+\item Java y framework NAUA para servicios, por coherencia con GISS y capacidad existente.
+\item APIs REST versionadas y eventos/mensajería para desacoplar cargas y consultas.
+\item Base relacional para consistencia de movimientos e importes; almacenamiento de objetos para ficheros y documentos.
+\item Índice de búsqueda para consultas rápidas sin sobrecargar la base transaccional.
+\item DWH o réplica analítica para cuadros de mando.
+\item Contenedores y CI/CD, con infraestructura como código y controles DevSecOps.
+\item Observabilidad: métricas, logs, trazas distribuidas y correlación por lote/fichero/consulta.
+\end{itemize}
+
+Se descarta un sistema monolítico porque dificultaría la evolución y la integración de cargas; se descarta un microservicio excesivamente fragmentado porque aumentaría la complejidad operativa y transaccional. Se reutilizan EDITRAN, PGIS y Cl@ve para no duplicar capacidades ya maduras.
+
+\section{Seguridad}
+
+\subsection{Categoría ENS}
+
+La categoría ENS debe determinarse mediante análisis formal de riesgos y de las dimensiones de seguridad. Como propuesta inicial, la PDC sería de \key{categoría MEDIA}, con impacto \key{ALTO en confidencialidad} y \key{ALTO en integridad}, y al menos MEDIO en disponibilidad, autenticidad y trazabilidad. La decisión final debe documentarse y validarse por los responsables de la información y del sistema.
+
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l l Y}\toprule
+\textbf{Dimensión} & \textbf{Impacto propuesto} & \textbf{Motivo}\\\midrule
+Confidencialidad & Alto & Derechos económicos, aportaciones e identificadores personales.\\
+Integridad & Alto & Un dato erróneo puede afectar a derechos, supervisión y confianza pública.\\
+Disponibilidad & Medio/Alto & Servicio ciudadano y regulatorio; debe soportar campañas y cargas diarias.\\
+Autenticidad & Alto & Hay perfiles externos, representantes y órganos con distinto alcance.\\
+Trazabilidad & Alto & Debe probarse origen, recepción, consulta y modificación de cada información.\\\bottomrule
+\end{tabularx}\end{center}
+
+La información privada requiere aplicar RGPD, Ley Orgánica 3/2018, ENS, ENI y normativa específica de planes y fondos de pensiones. También deben contemplarse eIDAS, NIS2 cuando resulte aplicable, normativa de accesibilidad y archivo electrónico.
+
+\subsection{Autenticación por perfiles}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}\toprule
+\textbf{Perfil} & \textbf{Acceso recomendado} & \textbf{Control adicional}\\\midrule
+Ciudadano, partícipe o beneficiario & Cl@ve/PGIS y mecanismos admitidos en la Sede. & MFA o nivel de garantía adecuado; acceso solo a sus datos.\\
+Promotor & Certificado de representante, Cl@ve u otro mecanismo corporativo. & Acreditación de entidad y ámbito de planes.\\
+Gestora/depositaria & Certificado de entidad y usuario nominativo. & Ficheros firmados, permisos por entidad y doble control.\\
+Comisiones & Identidad personal más acreditación de pertenencia. & Ámbito limitado a plan/fondo y vigencia del mandato.\\
+DGOSS/DGSFP & Identidad corporativa reforzada. & Funciones y datos según competencia.\\
+Administrador PDC & Identidad interna fuerte y MFA. & Privilegios separados, bastión, aprobación y registro reforzado.\\\bottomrule
+\end{tabularx}\end{center}
+
+La autenticación responde a ``quién eres'' y la autorización a ``qué puedes hacer y sobre qué''. Se recomienda RBAC combinado con ABAC: rol, entidad, plan/fondo, relación jurídica, periodo de vigencia y tipo de dato. Los administradores no deben consultar por defecto datos de negocio.
+
+\subsection{Medidas principales}
+\begin{itemize}
+\item Inventario, análisis de riesgos, política de seguridad y responsables ENS.
+\item Cifrado TLS y en reposo; gestión segura de certificados y claves.
+\item Firma y validación de ficheros, antirrepetición, hash, sellado de tiempo y custodia del original.
+\item Cuarentena, antivirus, validación de estructura y límites de tamaño.
+\item Segregación de redes, WAF, bastionado, gestión de vulnerabilidades y parcheado.
+\item Logs inmutables de cargas, consultas, autorizaciones y administración; SIEM y alertas.
+\item Minimización, limitación de finalidad, retención, anonimización para agregados y evaluación de impacto de protección de datos.
+\item Copias, alta disponibilidad, recuperación ante desastre, pruebas de restauración y plan de continuidad.
+\item Desarrollo seguro: revisión de código, SAST/DAST, dependencias, secretos, pruebas de penetración y CI/CD controlada.
+\end{itemize}
+
+\section{Planificación}
+
+\subsection{Cronograma e hitos}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}\toprule
+\textbf{Periodo} & \textbf{Actuaciones} & \textbf{Hito}\\\midrule
+Mes 1 & Gobierno, alcance, actores, requisitos, protección de datos, riesgos y arquitectura inicial. & Inicio y línea base.\\
+Meses 2--3 & Modelo de datos, ficheros, interfaces EDITRAN, identidad, UX móvil y prototipos. & Diseño validado.\\
+Meses 4--6 & Ingesta, validación, catálogo, consulta individual básica, autenticación y auditoría. & \key{MVP operativo}.\\
+Meses 7--9 & Consultas de promotores y comisiones, cuadros de mando, reclamaciones y mejoras de calidad. & Piloto ampliado.\\
+Meses 10--12 & Pruebas de carga, seguridad, accesibilidad, continuidad, formación y migración inicial. & Aceptación y puesta en producción.\\
+Tras la puesta en marcha & Evolución, analítica avanzada, notificaciones y nuevas integraciones. & Mejora continua.\\\bottomrule
+\end{tabularx}\end{center}
+
+\subsection{MVP de seis meses}
+
+El MVP debe ser útil, seguro y limitado. Incluiría:
+\begin{enumerate}
+\item Recepción EDITRAN de ficheros de gestoras y depositarias, con certificado, control de formato, antivirus, trazabilidad, ACK y errores.
+\item Modelo común de fondos, planes, entidades, partícipes, beneficiarios, promotores, movimientos y derechos.
+\item Carga validada y publicación consistente, con histórico y control de duplicados.
+\item Acceso ciudadano mediante Sede, PGIS/Cl@ve, consulta de planes, aportaciones y derechos propios.
+\item Gestión básica de promotores y gestoras con ámbito restringido.
+\item Administración de usuarios, roles, entidades y autorizaciones.
+\item Auditoría, monitorización operativa, copias y soporte.
+\end{enumerate}
+
+Quedarían fuera del MVP, salvo necesidad legal: analítica predictiva, simuladores avanzados, aplicación móvil nativa, automatización inteligente de reclamaciones, participación, integraciones no esenciales y cuadros de mando complejos. La prioridad es que el dato recibido sea fiable, seguro, trazable y consultable.
+
+\subsection{Metodologías y herramientas}
+
+Modelo híbrido: gobierno por hitos y entregables, desarrollo iterativo con Scrum/Kanban, validación continua con responsables funcionales y DevSecOps. Cada sprint debe producir software probado, documentación y evidencias de seguridad.
+
+Herramientas: repositorio Git, gestión de historias y defectos, wiki, arquitectura y modelo de datos versionados, CI/CD, análisis estático, análisis de dependencias, pruebas automatizadas, repositorio de artefactos, contenedores, infraestructura como código, monitorización, SIEM y gestión de configuración.
+
+La gestión de configuración debe incluir: identificación de elementos, línea base del MVP, ramas protegidas, revisión por pares, etiquetado de versiones, trazabilidad requisito--código--prueba--despliegue, gestión de cambios, segregación de entornos, control de parámetros y procedimiento de rollback.
+
+\section{Mejoras e innovación}
+
+\subsection{1. Panel personal y alertas}
+Notificaciones de nueva aportación, cambio de valoración, traslado, incidencia de datos o actualización de derechos. Beneficia al ciudadano al hacer visible la evolución de su previsión. Exige preferencias, consentimiento cuando proceda, canal seguro y control de accesibilidad.
+
+\subsection{2. Simulador de previsión complementaria}
+Estimaciones orientativas a partir de aportaciones y escenarios, mostrando claramente hipótesis y carácter no vinculante. Ayuda a comprender derechos futuros, pero debe evitar asesoramiento financiero automatizado no supervisado.
+
+\subsection{3. Visión agregada y transparencia}
+Cuadros públicos anonimizados sobre número de planes, partícipes, aportaciones y evolución, con metodología y protección frente a reidentificación. Mejora la confianza y permite evaluación de políticas públicas.
+
+\subsection{4. Analítica avanzada}
+Detección de cargas anómalas, duplicados, retrasos, variaciones inusuales o incompatibilidades. Se puede usar aprendizaje automático como apoyo, pero las decisiones de supervisión deben ser explicables, auditables y humanas.
+
+\subsection{5. Asistente de lenguaje claro}
+Un asistente basado en recuperación de documentación oficial puede explicar conceptos como derechos consolidados o aportaciones, siempre mostrando fuentes, fecha y límites. No debe inventar datos personales ni adoptar decisiones.
+
+\subsection{6. Accesibilidad e inclusión}
+Lenguaje claro, lectura fácil, contraste, teclado, lectores de pantalla, adaptación móvil, canales asistidos y apoyo a colectivos con brecha digital. La innovación no es solo tecnológica: también es organizativa y de servicio.
+
+\subsection{7. Reclamaciones integradas}
+Pre-rellenado de datos, clasificación asistida, seguimiento de plazos, derivación al responsable y análisis de causas recurrentes. Reduce cargas administrativas y mejora la calidad de las entidades fuente.
+
+\subsection{Impacto organizativo y técnico}
+Estas mejoras requieren un equipo de producto, gobierno del dato, responsable de IA cuando proceda, DPD, accesibilidad, analítica y soporte ciudadano. Técnicamente añaden APIs, notificaciones, modelos analíticos, catálogo de fuentes, trazabilidad de decisiones y controles de privacidad. Deben desarrollarse después del núcleo fiable y mediante pilotos, pruebas con usuarios y evaluación de impacto.
+
+\section{Segunda parte: informe ejecutivo}
+
+\subsection{Motivación}
+
+El envejecimiento demográfico, la evolución de las carreras laborales y la necesidad de complementar los ingresos futuros hacen relevante impulsar la previsión social complementaria de empleo. La PDC materializa una infraestructura pública común que mejora la información, la interoperabilidad y la supervisión de los fondos de promoción pública, sin sustituir las obligaciones de las gestoras y depositarias.
+
+En el contexto europeo posterior a la COVID-19, la digitalización debe contribuir a la resiliencia, la inclusión y la sostenibilidad financiera. La PDC proporciona una visión homogénea y trazable para ciudadanos, promotores y órganos públicos.
+
+\subsection{Impacto jurídico}
+\begin{itemize}
+\item Desarrolla las obligaciones de la Ley 12/2022, del Real Decreto 885/2022 y del Real Decreto 668/2023.
+\item Debe cumplir la normativa de planes y fondos de pensiones, RGPD, Ley Orgánica 3/2018, ENS, ENI, eIDAS, procedimiento administrativo, accesibilidad y archivo.
+\item La PDC informa, pero no sustituye la información que gestoras y depositarias deben proporcionar por sus medios.
+\item Deben definirse responsabilidades sobre exactitud, actualización, conservación, rectificación, reclamaciones y brechas de seguridad.
+\end{itemize}
+
+\subsection{Impacto social}
+Mejora la comprensión de la previsión complementaria, facilita el acceso a información consolidada y reduce la dependencia de documentos dispersos. La atención debe incluir canales no digitales o asistidos para evitar que la plataforma aumente la brecha digital.
+
+\subsection{Impacto económico}
+Reduce costes de integración y consultas repetitivas, normaliza procesos de gestoras y depositarias y facilita supervisión basada en datos. El coste inicial de interoperabilidad, seguridad y operación se compensa con reutilización, automatización y mejor calidad de la información.
+
+\subsection{Impacto medioambiental}
+La consulta digital y la reducción de intercambios físicos disminuyen papel y desplazamientos. Deben gestionarse también el consumo de centros de datos, la eficiencia de consultas y el ciclo de vida de equipos, favoreciendo arquitectura escalable y medición de consumo.
+
+\subsection{Impacto de género e igualdad}
+La plataforma permite analizar agregadamente diferencias de cobertura y aportaciones, sin publicar datos que permitan identificar personas. Debe garantizar lenguaje inclusivo, accesibilidad y ausencia de sesgos en cualquier analítica o recomendación.
+
+\subsection{Indicadores ejecutivos}
+Cobertura de entidades integradas, porcentaje de ficheros procesados sin error, tiempo de disponibilidad del dato, usuarios activos, consultas resueltas, reclamaciones dentro de plazo, disponibilidad, incidentes de seguridad, accesibilidad y evolución de la calidad.
+
+\section{Ideas de cierre para el examen}
+
+La respuesta debe presentar esta cadena:
+\begin{center}\Large\bfseries\color{navy}
+Fuente autorizada $\rightarrow$ EDITRAN $\rightarrow$ Validación $\rightarrow$ Modelo común $\rightarrow$ Histórico $\rightarrow$ Autorización $\rightarrow$ Consulta $\rightarrow$ Supervisión $\rightarrow$ Auditoría
+\end{center}
+
+Para cada módulo hay que identificar actor, dato, interfaz, control y evidencia. La mejor solución no es la más compleja: es la que reutiliza capacidades GISS, entrega un MVP fiable en seis meses, protege datos personales, mantiene trazabilidad y permite evolucionar hacia servicios de mayor valor sin confundir información con gestión transaccional.
+
+\end{document}

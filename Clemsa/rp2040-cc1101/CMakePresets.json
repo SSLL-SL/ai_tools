@@ -1,0 +1,51 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 13,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "rp2040",
+            "displayName": "RP2040 Release",
+            "description": "Configuracion para RP2040-Zero con toolchain ARM oficial",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "$env{HOME}/arm-gnu-toolchain/bin/arm-none-eabi-gcc",
+                "CMAKE_CXX_COMPILER": "$env{HOME}/arm-gnu-toolchain/bin/arm-none-eabi-g++",
+                "CMAKE_ASM_COMPILER": "$env{HOME}/arm-gnu-toolchain/bin/arm-none-eabi-gcc",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "PICO_SDK_PATH": "$env{HOME}/pico-sdk"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "all",
+            "configurePreset": "rp2040",
+            "displayName": "TX + RX",
+            "targets": [
+                "all"
+            ]
+        },
+        {
+            "name": "tx",
+            "configurePreset": "rp2040",
+            "displayName": "Solo TX",
+            "targets": [
+                "cc1101_tx"
+            ]
+        },
+        {
+            "name": "rx",
+            "configurePreset": "rp2040",
+            "displayName": "Solo RX",
+            "targets": [
+                "cc1101_rx"
+            ]
+        }
+    ]
+}

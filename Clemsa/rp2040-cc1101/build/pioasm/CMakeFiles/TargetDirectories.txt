@@ -1,0 +1,7 @@
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/pioasm.dir
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/edit_cache.dir
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/rebuild_cache.dir
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/list_install_components.dir
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/install.dir
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/install/local.dir
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm/CMakeFiles/install/strip.dir

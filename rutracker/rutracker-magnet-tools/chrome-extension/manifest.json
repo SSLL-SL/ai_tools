@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Extractor de magnet links",
+  "version": "1.0.0",
+  "description": "Extrae enlaces magnet de la pestaña activa.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "clipboardWrite",
+    "downloads"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8765/*"
+  ],
+  "action": {
+    "default_title": "Extraer magnet links",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,15 @@
+services:
+  ps4-fpkg-collection:
+    build: .
+    container_name: ps4-fpkg-collection
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./data/GAMES.json:/data/GAMES.json:ro
+      - ./data/config.json:/data/config.json
+      - ./downloads:/app/downloads
+    environment:
+      - GAMES_JSON_PATH=/data/GAMES.json
+      - CONFIG_PATH=/data/config.json
+      - QUEUE_PATH=/data/queue.json
+    restart: unless-stopped

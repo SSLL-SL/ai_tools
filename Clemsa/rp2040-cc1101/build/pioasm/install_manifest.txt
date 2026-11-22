@@ -1,0 +1,5 @@
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm-install/pioasm/pioasm
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm-install/pioasm/pioasmTargets.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm-install/pioasm/pioasmTargets-release.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm-install/pioasm/pioasmConfig.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/pioasm-install/pioasm/pioasmConfigVersion.cmake

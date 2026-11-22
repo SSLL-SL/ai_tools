@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f7f4" />
+    <meta name="description" content="Compara tarifas de electricidad según tu consumo y la potencia contratada." />
+    <title>Clara — Comparador de tarifas eléctricas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Clara, inicio">
+        <span class="brand-mark" aria-hidden="true">c</span>
+        <span>clara<span class="brand-period">.</span></span>
+      </a>
+      <div class="topbar-note"><span class="status-dot"></span> Tu comparador de luz, sin líos</div>
+      <a class="topbar-link" href="#como-calculamos">Cómo calculamos <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="inicio">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> DECIDE CON TUS NÚMEROS</div>
+          <h1 id="page-title">La tarifa que te conviene<br /><span>empieza por tus datos.</span></h1>
+          <p>Introduce tu consumo y compara cuánto pagarías con cada tipo de tarifa. Sin letra pequeña ni estimaciones escondidas.</p>
+        </div>
+        <div class="intro-illustration" aria-hidden="true">
+          <div class="sun-glow"></div>
+          <div class="sun">✳</div>
+          <div class="plant plant-one"><i></i><i></i><i></i><b></b></div>
+          <div class="plant plant-two"><i></i><i></i><b></b></div>
+          <div class="ground"></div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Calculadora y comparación de tarifas">
+        <aside class="input-panel panel">
+          <div class="panel-heading">
+            <div class="step-number">01</div>
+            <div><h2>Tus datos</h2><p>Un mes típico en casa</p></div>
+          </div>
+
+          <fieldset class="input-group consumption-group">
+            <legend><span class="legend-icon">↯</span> Consumo mensual <span class="unit">kWh</span></legend>
+            <label class="field-row"><span><i class="period-dot dot-peak"></i>Punta</span><input id="usage-peak" type="number" min="0" step="1" value="95" inputmode="decimal" aria-label="Consumo mensual punta en kilovatios hora" /></label>
+            <label class="field-row"><span><i class="period-dot dot-flat"></i>Llano</span><input id="usage-flat" type="number" min="0" step="1" value="85" inputmode="decimal" aria-label="Consumo mensual llano en kilovatios hora" /></label>
+            <label class="field-row"><span><i class="period-dot dot-valley"></i>Valle</span><input id="usage-valley" type="number" min="0" step="1" value="120" inputmode="decimal" aria-label="Consumo mensual valle en kilovatios hora" /></label>
+            <div class="input-hint">¿No tienes el desglose? Lo encontrarás en tu factura.</div>
+          </fieldset>
+
+          <fieldset class="input-group power-group">
+            <legend><span class="legend-icon power-icon">⌁</span> Potencia contratada <span class="unit">kW</span></legend>
+            <label class="field-row"><span><i class="period-dot dot-peak"></i>Punta</span><input id="power-peak" type="number" min="0" step="0.1" value="4.6" inputmode="decimal" aria-label="Potencia contratada punta en kilovatios" /></label>
+            <label class="field-row"><span><i class="period-dot dot-valley"></i>Valle</span><input id="power-valley" type="number" min="0" step="0.1" value="4.6" inputmode="decimal" aria-label="Potencia contratada valle en kilovatios" /></label>
+          </fieldset>
+
+          <div class="data-note"><span aria-hidden="true">ⓘ</span><span>Los cálculos se hacen en tu navegador; no enviamos tus datos.</span></div>
+        </aside>
+
+        <section class="results-panel" aria-labelledby="results-title">
+          <div class="results-heading">
+            <div>
+              <div class="section-kicker">02 <span>·</span> TUS RESULTADOS</div>
+              <h2 id="results-title">Compara tus tarifas</h2>
+            </div>
+            <button class="add-button" id="open-dialog" type="button"><span aria-hidden="true">＋</span> Añadir tarifa</button>
+          </div>
+
+          <div class="summary-strip" aria-live="polite">
+            <div class="summary-icon" aria-hidden="true">↘</div>
+            <div class="summary-copy"><strong id="summary-title">Tu mejor opción está aquí</strong><span id="summary-detail">Ajusta tus datos para ver cuánto puedes ahorrar.</span></div>
+            <div class="summary-amount"><strong id="annual-saving">—</strong><span>menos al año que la siguiente</span></div>
+          </div>
+
+          <div class="list-caption"><span id="tariff-count">4 tarifas de ejemplo</span><span>Ordenadas de menor a mayor coste</span></div>
+          <div id="tariff-list" class="tariff-list" aria-live="polite"></div>
+          <p class="demo-notice"><span aria-hidden="true">✳</span> Tarifas ficticias para demostración. Añade los precios de las ofertas reales para compararlas.</p>
+        </section>
+      </section>
+
+      <section id="como-calculamos" class="method-note">
+        <div class="method-mark" aria-hidden="true">=</div>
+        <div><h2>Una comparación clara</h2><p>Sumamos el coste de la energía según tus kWh por periodo, la potencia punta y valle (precio por kW y día, para un mes de 30 días) y cualquier cuota mensual que indiques. El resultado es una estimación antes de impuestos, alquiler del contador y otros conceptos de la factura.</p></div>
+        <div class="method-equation" aria-label="Energía más potencia más cuota mensual">energía <span>+</span> potencia <span>+</span> cuota</div>
+      </section>
+      <footer class="footer"><span>clara<span class="brand-period">.</span> · Compara con calma.</span><span>Estimaciones orientativas, no ofertas comerciales.</span></footer>
+    </main>
+
+    <dialog id="tariff-dialog" aria-labelledby="dialog-title">
+      <form id="tariff-form">
+        <div class="dialog-heading"><div><div class="section-kicker" id="dialog-context">NUEVA OFERTA</div><h2 id="dialog-title">Añade una tarifa</h2></div><button class="close-button" type="button" id="close-dialog" aria-label="Cerrar">×</button></div>
+        <p class="dialog-intro">Introduce los precios tal como aparecen en la oferta. Los precios de energía se expresan en €/kWh y los de potencia en €/kW/día.</p>
+        <label class="form-label">Nombre de la tarifa<input name="name" type="text" required maxlength="40" placeholder="Ej. Plan Casa" /></label>
+        <label class="form-label">Tipo de tarifa<select name="type" id="tariff-type"><option value="flat">Plana 24h</option><option value="two">2 periodos</option><option value="three">3 periodos</option><option value="market">Mercado (precio estimado)</option></select></label>
+        <div class="form-section-title">Precio de energía <span>€/kWh</span></div>
+        <div class="form-grid" id="energy-fields"></div>
+        <div class="form-section-title">Precio de potencia <span>€/kW/día</span></div>
+        <div class="form-grid">
+          <label class="form-label">Punta<input name="powerPeak" type="number" min="0" step="0.001" required value="0.095" /></label>
+          <label class="form-label">Valle<input name="powerValley" type="number" min="0" step="0.001" required value="0.029" /></label>
+        </div>
+        <label class="form-label fee-label">Cuota fija mensual <span>€/mes, opcional</span><input name="fee" type="number" min="0" step="0.01" value="0" /></label>
+        <div class="dialog-actions"><button class="cancel-button" type="button" id="cancel-dialog">Cancelar</button><button class="submit-button" type="submit">Añadir a la comparación <span aria-hidden="true">→</span></button></div>
+      </form>
+    </dialog>
+  </body>
+</html>

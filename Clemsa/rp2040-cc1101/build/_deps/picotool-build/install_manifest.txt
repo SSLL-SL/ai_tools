@@ -1,0 +1,7 @@
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/picotool
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/picotoolTargets.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/picotoolTargets-release.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/picotoolConfig.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/picotoolConfigVersion.cmake
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/enc_bootloader.elf
+/Users/ricardogarcia/Documents/New OpenCode Project/rp2040-cc1101/build/_deps/picotool/enc_bootloader_mbedtls.elf

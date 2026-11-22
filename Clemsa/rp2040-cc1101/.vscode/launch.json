@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex-Debug: cc1101_tx",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/cc1101_tx.elf",
+            "servertype": "openocd",
+            "device": "RP2040",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/rp2040.cfg"
+            ],
+            "svdFile": "${env:HOME}/pico-sdk/src/rp2040/hardware_regs/RP2040.svd",
+            "runToEntryPoint": "main",
+            "gdbTarget": "localhost:3333",
+            "preLaunchTask": "Build: TX solo"
+        },
+        {
+            "name": "Cortex-Debug: cc1101_rx",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/cc1101_rx.elf",
+            "servertype": "openocd",
+            "device": "RP2040",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/rp2040.cfg"
+            ],
+            "svdFile": "${env:HOME}/pico-sdk/src/rp2040/hardware_regs/RP2040.svd",
+            "runToEntryPoint": "main",
+            "gdbTarget": "localhost:3333",
+            "preLaunchTask": "Build: RX solo"
+        }
+    ]
+}

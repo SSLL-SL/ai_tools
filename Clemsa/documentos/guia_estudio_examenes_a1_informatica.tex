@@ -1,0 +1,429 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\spanishdeactivate{<>}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\geometry{margin=2.1cm,headheight=14pt}
+\definecolor{navy}{HTML}{17324D}
+\definecolor{blue}{HTML}{246B9F}
+\definecolor{teal}{HTML}{167A72}
+\definecolor{orange}{HTML}{B46118}
+\definecolor{lightblue}{HTML}{EAF3F8}
+\definecolor{lightgray}{HTML}{F3F5F7}
+\definecolor{darkgray}{HTML}{46515C}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=blue,pdftitle={Guía de estudio: supuestos prácticos A1 informática}}
+\pagestyle{fancy}\fancyhf{}
+\lhead{\textcolor{darkgray}{Guía de estudio A1 informática}}
+\rhead{\textcolor{darkgray}{Supuestos prácticos}}
+\cfoot{\thepage}
+\titleformat{\section}{\Large\bfseries\color{navy}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{blue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{teal}}{\thesubsubsection}{0.6em}{}
+\setlist[itemize]{leftmargin=1.25em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=2pt,topsep=3pt}
+\newcommand{\key}[1]{\textbf{\textcolor{navy}{#1}}}
+\newcommand{\tagtopic}[1]{\textcolor{white}{\fcolorbox{blue}{blue}{\textbf{#1}}}}
+\newcommand{\boxnote}[1]{\begin{center}\fcolorbox{blue}{lightblue}{\parbox{0.92\textwidth}{#1}}\end{center}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{document}
+\begin{titlepage}
+\centering\vspace*{1.5cm}
+{\Large\textcolor{darkgray}{PREPARACIÓN DEL CUERPO SUPERIOR DE SISTEMAS Y TI}}\\[1cm]
+{\Huge\bfseries\textcolor{navy}{Guía transversal de estudio}}\\[0.25cm]
+{\LARGE Supuestos prácticos A1 de informática}\\[1.4cm]
+{\large Temario desarrollado + plan de estudio hasta el 16 de octubre de 2026}\\[2cm]
+\begin{tikzpicture}[node distance=7mm]
+\tikzset{b/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=3.1cm,minimum height=10mm}}
+\node[b] (j) {Derecho y\\Administración};
+\node[b,right=of j] (a) {Arquitectura y\\tecnología};
+\node[b,right=of a] (s) {Seguridad y\\datos};
+\node[b,below=of a] (p) {Planificación,\\contratación y examen};
+\draw[-stealth,thick,blue] (j)--(a);\draw[-stealth,thick,blue] (a)--(s);\draw[-stealth,thick,blue] (j)--(p);\draw[-stealth,thick,blue] (s)--(p);
+\end{tikzpicture}
+\vfill
+\begin{minipage}{0.84\textwidth}\small\centering
+Documento elaborado a partir de los supuestos sobre ciclo presupuestario, Plataforma Digital Común de pensiones y Plataforma Digital de Cooperación entre Administraciones.\\[3pt]
+\textbf{Fecha de referencia del plan: 24 de septiembre--16 de octubre de 2026.}
+\end{minipage}
+\end{titlepage}
+
+\tableofcontents\newpage
+
+\section{Cómo utilizar esta guía}
+
+Los tres ejercicios no exigen memorizar tecnologías aisladas. Exigen demostrar que se sabe convertir un problema jurídico-organizativo en una solución de información \key{integral, segura, interoperable, implantable y justificable}. Los patrones comunes son:
+\begin{itemize}
+\item identificar actores, competencias, procesos y documentos;
+\item separar dominios funcionales y responsabilidades;
+\item diseñar arquitectura lógica y física;
+\item asegurar identidad, autorización, trazabilidad, continuidad y protección de datos;
+\item priorizar un MVP y justificar recursos, costes y calendario;
+\item incluir datos, transparencia, accesibilidad e innovación sin comprometer la legalidad.
+\end{itemize}
+
+\subsection{Método de respuesta}
+\begin{enumerate}
+\item Comenzar con alcance, supuestos y objetivos.
+\item Repetir la numeración exacta del enunciado.
+\item En cada módulo indicar funciones, actores, datos, interfaces, controles y evidencias.
+\item Dibujar al menos un diagrama lógico y uno físico o de proceso.
+\item Justificar las decisiones frente a alternativas, no enumerar productos.
+\item Terminar con riesgos, implantación, indicadores y conclusión ejecutiva.
+\end{enumerate}
+
+\boxnote{\key{Plantilla mental}: problema institucional $\rightarrow$ procesos $\rightarrow$ dominios $\rightarrow$ datos $\rightarrow$ integraciones $\rightarrow$ seguridad $\rightarrow$ arquitectura $\rightarrow$ MVP $\rightarrow$ evolución.}
+
+\section{Temario I. Marco jurídico y Administración digital}
+
+\subsection{1. Organización administrativa y cooperación}
+
+La Ley 40/2015 estructura las relaciones interadministrativas sobre cooperación, colaboración y coordinación. Los órganos de cooperación pueden ser multilaterales o bilaterales y reunir AGE, comunidades autónomas, Ceuta, Melilla y, en determinados casos, entidades locales.
+
+La Plataforma de Cooperación se justifica por el artículo 142.c) y la disposición adicional trigésima: debe facilitar reuniones, documentos, decisiones, acuerdos y trabajo electrónico de Conferencias Sectoriales y otros órganos. Cada Conferencia tiene reglamento interno, debe inscribirse en el registro correspondiente y puede contar con Comisión Sectorial y Grupos de trabajo.
+
+\key{Qué estudiar}: artículos 142, 145--154 de la Ley 40/2015; funciones de Presidencia, Secretaría, Comisión Sectorial y Grupos de trabajo; convocatoria, orden del día, acuerdos, recomendaciones, planes conjuntos, actas y certificaciones.
+
+\subsection{2. Procedimiento administrativo electrónico}
+
+La Ley 39/2015 regula identificación, firma, registros, expediente, notificaciones, archivo y actuación administrativa automatizada. La Ley 40/2015 regula el funcionamiento del sector público, relaciones electrónicas, interoperabilidad y seguridad.
+
+Un expediente electrónico debe conservar contexto, documentos, metadatos, versiones, firmas, sellos de tiempo, estados, responsables y evidencias. La plataforma debe diferenciar borrador, trámite, aprobación, publicación, archivo y expurgo.
+
+\key{Respuesta de examen}: relacionar cada función con el acto administrativo que soporta. Una convocatoria no es solo un evento de calendario: es una comunicación formal con destinatarios, orden del día, documentos, fecha y evidencia de remisión.
+
+\subsection{3. Transparencia, reutilización y accesibilidad}
+
+La Ley 19/2013 exige publicidad activa y acceso a la información, con límites por protección de datos, seguridad, secreto comercial o deliberaciones reservadas. Los datos abiertos deben publicarse en formatos reutilizables, con metadatos, actualización y licencia.
+
+La accesibilidad debe aplicarse desde el diseño: WCAG, lectura clara, teclado, contraste, lectores de pantalla, adaptación móvil, subtítulos y alternativas para personas con discapacidad o brecha digital.
+
+\subsection{4. Interoperabilidad}
+
+El Esquema Nacional de Interoperabilidad orienta estándares, expediente, documento, firma, archivo, reutilización y modelos de datos. Conviene citar directorios, intercambio de datos, APIs, formatos estructurados, metadatos, identificadores comunes y catálogo de servicios.
+
+\subsection{5. Firma, identidad y archivo}
+
+El Reglamento eIDAS y la normativa española de identificación y firma permiten distinguir autenticación, firma, sello electrónico, sello de tiempo y validación. No todo acceso necesita firma, pero sí los actos que expresan voluntad o certifican un resultado.
+
+El archivo debe garantizar integridad, disponibilidad, autenticidad, conservación, migración y trazabilidad. Una grabación o transcripción puede ser evidencia auxiliar, pero no sustituye automáticamente el acta firmada.
+
+\section{Temario II. Dominio presupuestario y financiero}
+
+\subsection{6. Ciclo presupuestario}
+
+El ciclo comprende planificación plurianual, objetivos de estabilidad y deuda, límite de gasto no financiero, directrices, propuestas de órganos gestores, consolidación, elaboración del proyecto, aprobación gubernamental, tramitación parlamentaria, enmiendas, Ley, distribución de créditos, ejecución, liquidación y rendición.
+
+\subsection{7. Clasificación y datos presupuestarios}
+
+El presupuesto se organiza por dimensiones orgánica, funcional o por programas y económica. El maestro presupuestario debe controlar ejercicios, centros, programas, aplicaciones, capítulos, conceptos, fuentes de financiación y relaciones entre estructuras.
+
+\subsection{8. Ejecución del gasto}
+
+Las fases son retención de crédito, autorización, compromiso o disposición, reconocimiento de la obligación, propuesta/ordenación del pago y pago. La aplicación debe impedir secuencias inválidas, importes superiores, imputaciones sin crédito y actuaciones sin expediente.
+
+\subsection{9. Contratación pública}
+
+La contratación se integra con el gasto: necesidad, memoria, pliegos, certificado de crédito, autorización, licitación, ofertas, valoración, adjudicación, firma, compromiso, ejecución, factura, recepción, obligación y pago. Hay que conocer procedimientos abierto, restringido, negociado justificado, menor, emergencia, acuerdos marco, sistemas dinámicos, contratos de obras, suministros, servicios y concesiones.
+
+\subsection{10. Contabilidad, control y tesorería}
+
+El órgano contable registra documentos de cada fase, realiza conciliaciones y participa en cierre, liquidación y Cuenta General. La fiscalización previa revisa legalidad, crédito y trámites; el control financiero y las auditorías revisan fiabilidad, cumplimiento, economía, eficacia y eficiencia. Tesorería ejecuta pagos y concilia con bancos.
+
+\key{Idea común}: separación de funciones. El gestor propone, el fiscalizador controla, la autoridad autoriza, el contable registra y Tesorería paga.
+
+\section{Temario III. Pensiones y Plataforma Digital Común}
+
+\subsection{11. Modelo funcional de la PDC}
+
+La Ley 12/2022 impulsa planes de pensiones de empleo, fondos de promoción pública abiertos y planes simplificados. El Real Decreto 885/2022 y el Real Decreto 668/2023 desarrollan el marco. La PDC da información común a partícipes, beneficiarios, promotores, gestoras, depositarias y órganos de supervisión.
+
+La PDC inicial no gestiona transacciones individuales: gestoras y depositarias son las fuentes de datos mediante ficheros normalizados y EDITRAN. La plataforma recibe, valida, normaliza, conserva el histórico y ofrece consultas según perfil.
+
+\subsection{12. Dominios PDC}
+\begin{itemize}
+\item ingesta EDITRAN, certificados, ACK, errores y cuarentena;
+\item normalización, calidad, duplicados y conciliación;
+\item fondos, planes, entidades, promotores y comisiones;
+\item movimientos, aportaciones, derechos consolidados y económicos;
+\item consultas ciudadanas y de órganos supervisores;
+\item identidad, roles, representantes, apoderamientos y ámbitos;
+\item informes, supervisión, reclamaciones, auditoría y trazabilidad.
+\end{itemize}
+
+\subsection{13. Modelo de autorización PDC}
+
+RBAC determina funciones por rol; ABAC añade entidad, plan, fondo, relación jurídica, vigencia y tipo de información. Un partícipe solo consulta sus datos; una gestora consulta sus envíos; una comisión consulta su ámbito; DGOSS y DGSFP acceden según competencia. La autenticación puede apoyarse en Cl@ve y PGIS, certificados de entidad y mecanismos corporativos.
+
+\section{Temario IV. Cooperación y Plataform@}
+
+\subsection{14. Modelo de espacios}
+
+Plataform@ debe representar una jerarquía de plataforma, órgano, Conferencia, Comisión, Grupo de trabajo y reunión. Cada espacio tiene miembros, administradores delegados, reglamento, plantillas, workflows, niveles de acceso, ciclo de vida documental y reglas de publicación.
+
+\subsection{15. Reuniones y documentos}
+
+El expediente de reunión cubre convocatoria, iniciativa, orden del día, documentación, asistentes, quórum, deliberación, votación, acuerdo o recomendación, acta, firma, certificación, publicación y seguimiento. El Secretario prepara, convoca, recibe comunicaciones, redacta actas, certifica y custodia.
+
+\subsection{16. Votación y delegación}
+
+Debe parametrizarse quórum, mayoría, voto nominal o reservado, peso de representación, voto particular y reglas del órgano. La delegación debe ser expresa, autenticada, limitada, revocable, trazable y compatible con la prohibición de doble voto. El sistema calcula y documenta; no sustituye la validación jurídica.
+
+\subsection{17. Videoconferencia}
+
+Debe asociarse a una reunión, controlar acceso y asistentes, permitir moderación, registrar incidencias y separar grabación/transcripción del acta. La transcripción automática es un borrador revisable. La emisión pública requiere autorización y revisión de confidencialidad.
+
+\subsection{18. Conocimiento jurídico y cooperación}
+
+El catálogo debe integrar convenios, legislación AGE/CCAA, reparto competencial y jurisprudencia constitucional. Debe tener fuente, vigencia, relaciones, materias, búsqueda, enlaces oficiales y control de actualización.
+
+\section{Temario V. Arquitectura de sistemas y aplicaciones}
+
+\subsection{19. Arquitectura lógica}
+
+Separar presentación, identidad, dominios funcionales, integración, datos, documentos, analítica y operación. Las aplicaciones deben tener límites claros y comunicarse por APIs versionadas, eventos o procesos ETL. Identificar siempre qué sistema es fuente, qué sistema transforma y cuál publica.
+
+\subsection{20. Arquitecturas de aplicación}
+
+La opción generalmente defendible es un \key{monolito modular evolucionable} o una arquitectura de servicios de dominio. Microservicios solo cuando aporten escalabilidad, autonomía o aislamiento reales. Patrones útiles: máquina de estados, workflow, RBAC/ABAC, auditoría inmutable, idempotencia, versionado, correlación de eventos y separación operacional/analítica.
+
+\subsection{21. Integración}
+
+REST para consultas y comandos, mensajería para eventos, colas para cargas, ETL para históricos y APIs de terceros. Deben definirse contratos, versionado, timeouts, reintentos, idempotencia, circuit breaker, trazas y tratamiento de errores.
+
+\subsection{22. Gestión documental}
+
+Repositorio de objetos con metadatos, hash, versión, firma, sello de tiempo, clasificación, retención y control de descarga. La base relacional conserva metadatos y relaciones; el contenido pesado se almacena en objeto; la búsqueda usa índice separado.
+
+\subsection{23. Interfaz y experiencia}
+
+Diseño responsive, accesible y móvil; lenguaje claro; navegación por tareas; mensajes de error accionables; internacionalización; soporte de asistencia; compatibilidad multiplataforma y pruebas con usuarios reales.
+
+\section{Temario VI. Infraestructura, nube y operación}
+
+\subsection{24. Arquitectura física}
+
+Esquema habitual: usuarios, CDN/WAF/balanceador, DMZ, frontend, API Gateway, servicios, bus, bases de datos, repositorio documental, analítica, monitorización y copias. Entornos separados: desarrollo, integración, pruebas, preproducción, producción y recuperación.
+
+\subsection{25. Nube frente a CPD}
+
+La nube aporta elasticidad, rapidez y servicios gestionados; el CPD aporta control, soberanía e integración con sistemas existentes. Una decisión madura suele ser híbrida. Justificar residencia, cifrado, claves, portabilidad, SLA, auditoría, reversibilidad, coste total y continuidad.
+
+\subsection{26. Dimensionamiento}
+
+Calcular usuarios nominales y concurrentes, crecimiento, almacenamiento transaccional y documental, multimedia, red, CPU, memoria, réplicas, backups, RPO/RTO y picos de campaña. Separar datos operativos de BI. No dimensionar solo con el volumen actual: incluir versiones, copias, logs y retención.
+
+\subsection{27. DevSecOps y operación}
+
+CI/CD, Git, ramas protegidas, revisión de código, pruebas automatizadas, SAST/DAST, dependencias, artefactos, infraestructura como código, observabilidad, logs centralizados, métricas, trazas, SIEM, gestión de vulnerabilidades y rollback.
+
+\section{Temario VII. Seguridad, ENS y protección de datos}
+
+\subsection{28. Dimensiones y categorización ENS}
+
+Analizar confidencialidad, integridad, disponibilidad, autenticidad y trazabilidad. Presupuesto y cooperación suelen exigir integridad/trazabilidad muy altas; pensiones exige confidencialidad e integridad altas; disponibilidad se valora según servicio y plazos. La categoría debe derivarse de análisis de riesgos y responsabilidades, no afirmarse sin justificar.
+
+\subsection{29. RGPD y privacidad}
+
+Principios: licitud, finalidad, minimización, exactitud, limitación de conservación, integridad/confidencialidad y responsabilidad proactiva. Aplicar privacidad desde el diseño, DPIA cuando proceda, registro de tratamientos, derechos, brechas, encargados, transferencias y anonimización para datos estadísticos.
+
+\subsection{30. Control de acceso}
+
+Identidad federada, MFA en perfiles privilegiados y actos críticos, mínimo privilegio, segregación de funciones, altas/bajas, revisión periódica, acceso temporal y trazabilidad. Separar identidad, rol y ámbito: una persona puede tener roles distintos en órganos diferentes.
+
+\subsection{31. Medidas técnicas y organizativas}
+\begin{itemize}
+\item cifrado, gestión de claves, firma, sellado y hash;
+\item segmentación, WAF, bastionado, EDR, parcheado y pruebas de penetración;
+\item logs inmutables, SIEM, alertas y respuesta a incidentes;
+\item copias inmutables, alta disponibilidad y recuperación;
+\item auditorías, formación, política de seguridad y análisis de riesgos;
+\item continuidad, simulacros, RTO/RPO y operación manual de contingencia.
+\end{itemize}
+
+\section{Temario VIII. Datos, transparencia e innovación}
+
+\subsection{32. Gobierno del dato}
+
+Definir propietarios, responsables, catálogo, glosario, calidad, linaje, clasificación, ciclo de vida y controles de acceso. Separar zona raw, curada y de consumo en un lake o lakehouse. Documentar origen, periodicidad, transformación y finalidad.
+
+\subsection{33. Analítica y cuadros de mando}
+
+Diseñar indicadores antes de elegir herramienta. Presupuesto: crédito, compromiso, obligación y pago. PDC: cargas, errores, derechos y cobertura. Plataform@: reuniones, asistencia, acuerdos y cumplimiento. Indicadores deben tener definición, fórmula, fuente, periodicidad, propietario y límites de interpretación.
+
+\subsection{34. Transparencia y datos abiertos}
+
+Publicar solo lo autorizado, en formatos reutilizables, con metadatos, actualización, licencia y control de versiones. Anonimizar o agregar cuando exista riesgo de identificación. El portal público debe consumir una vista de publicación, nunca exponer directamente la base transaccional.
+
+\subsection{35. Inteligencia artificial responsable}
+
+Casos defendibles: clasificación documental, extracción de metadatos, detección de anomalías, predicción de carga, búsqueda semántica y transcripción asistida. Siempre con supervisión humana, explicabilidad, evaluación de sesgos, control de datos, registro de versiones y posibilidad de no automatizar una decisión jurídicamente relevante.
+
+\section{Temario IX. Planificación, recursos y contratación}
+
+\subsection{36. Cronograma y MVP}
+
+Fases: inicio y gobierno; requisitos y arquitectura; diseño; desarrollo iterativo; integraciones; pruebas; piloto; migración/formación; producción; soporte y evolución. El MVP debe cubrir el camino de mayor valor y riesgo: identidad, datos maestros, expediente, documentos, controles, auditoría y un flujo completo.
+
+\subsection{37. Recursos}
+
+Gobierno: comité, dirección y PMO. Funcional: propietarios de procesos, jurídico, datos, seguridad, archivo, transparencia y usuarios. Técnico: arquitectura, análisis, UX, desarrollo, integración, datos, QA, DevOps y operación. No olvidar soporte, formación, gestión del cambio y continuidad.
+
+\subsection{38. Contratación pública TIC}
+
+Justificar necesidad, insuficiencia de medios, objeto, lotes, solvencia, criterios de adjudicación, niveles de servicio, seguridad, propiedad intelectual, reutilización, transferencia y reversibilidad. El procedimiento abierto suele ser la opción ordinaria para servicios de desarrollo; valorar acuerdos marco o contratación centralizada si existen.
+
+\subsection{39. Estimación económica}
+
+Separar desarrollo, licencias, infraestructura, integración, seguridad, pruebas, formación, migración y explotación recurrente. Incluir contingencia y no ocultar costes de nube, almacenamiento, videoconferencia, soporte y evolución.
+
+\section{Técnica para redactar en el examen}
+
+\subsection{40. Esqueleto de respuesta}
+\begin{enumerate}
+\item Introducción: objetivo, alcance, supuestos y principios.
+\item Modelo lógico: actores, dominios, datos, procesos y diagrama.
+\item Tecnología: arquitectura, alternativas, infraestructura e integración.
+\item Seguridad: impacto, ENS, RGPD, identidad, acceso, continuidad y auditoría.
+\item Planificación: MVP, fases, hitos, equipos, metodología y costes.
+\item Innovación/datos: valor, impacto, riesgos y evolución.
+\item Conclusión: beneficios, riesgos residuales y decisión recomendada.
+\end{enumerate}
+
+\subsection{41. Frases de alto rendimiento}
+\begin{itemize}
+\item ``La solución separa la operación transaccional de la explotación analítica para proteger rendimiento e integridad.''
+\item ``La autorización combina rol y ámbito; conocer la identidad no concede acceso universal.''
+\item ``La parametrización permite adaptar reglamentos sin modificar código.''
+\item ``La evidencia de cada actuación forma parte del expediente y se conserva con integridad y sello de tiempo.''
+\item ``El MVP prioriza el flujo completo de mayor riesgo y deja la innovación avanzada para una evolución controlada.''
+\end{itemize}
+
+\subsection{42. Errores que restan puntos}
+\begin{itemize}
+\item Enumerar marcas sin justificar requisitos.
+\item Proponer microservicios por moda o una única aplicación monolítica para todo.
+\item Olvidar actores, responsabilidades, documentos o separación de funciones.
+\item Confundir autenticación con autorización.
+\item Publicar datos sin hablar de privacidad, anonimización y ciclo de vida.
+\item Omitir operación, continuidad, soporte, formación y reversibilidad.
+\item No responder exactamente a un apartado o no hacer visible el MVP.
+\end{itemize}
+
+\section{Calendario de estudio: 24 de septiembre--16 de octubre}
+
+El plan supone aproximadamente 4--5 horas diarias: dos bloques de estudio, un bloque de recuperación activa y un ejercicio escrito. Si se dispone de menos tiempo, conservar siempre el repaso activo y los simulacros, reduciendo la lectura pasiva.
+
+\subsection{Semana 1: base jurídica y modelo de respuesta}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{l l Y Y}\toprule
+\textbf{Fecha} & \textbf{Tema} & \textbf{Trabajo principal} & \textbf{Salida obligatoria}\\\midrule
+24/09 & Diagnóstico & Leer los tres enunciados; extraer actores, puntos y fechas. & Mapa común de 1 página.\\
+25/09 & Ley 39/2015 & Expediente, identificación, firma, registro, notificación y archivo. & Esquema + respuesta de 30 min.\\
+26/09 & Ley 40/2015 & Cooperación, órganos, Conferencias, Secretarías y decisiones. & Tabla de artículos y diagrama Plataform@.\\
+27/09 & ENS, RGPD, ENI & Dimensiones, riesgos, medidas, privacidad e interoperabilidad. & Matriz de seguridad.\\
+28/09 & Contratación TIC & Procedimientos, lotes, criterios, SLA, reversibilidad. & Relación valorada de 1,35 M€.\\
+29/09 & Presupuesto I & Planificación, aprobación, clasificación y crédito. & Flujo presupuestario completo.\\
+30/09 & Presupuesto II & Gasto, contratación, contabilidad, control y Tesorería. & Caso de expediente de gasto.\\\bottomrule
+\end{tabularx}\end{center}
+
+\subsection{Semana 2: dominios y arquitectura}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{l l Y Y}\toprule
+\textbf{Fecha} & \textbf{Tema} & \textbf{Trabajo principal} & \textbf{Salida obligatoria}\\\midrule
+01/10 & Arquitectura lógica & Dominios, límites, actores, datos y APIs. & Diagrama común reutilizable.\\
+02/10 & Integración & REST, eventos, colas, ETL, errores, idempotencia y trazas. & Catálogo de interfaces.\\
+03/10 & Arquitectura física & CPD, nube, híbrida, redes, entornos y continuidad. & Diagrama físico + dimensionamiento.\\
+04/10 & Aplicaciones & Modularidad, workflows, documentos, búsqueda y UX. & Decisiones frente a alternativas.\\
+05/10 & PDC pensiones & EDITRAN, PGIS, Cl@ve, cargas, histórico y perfiles. & Respuesta PDC 90 min.\\
+06/10 & Plataform@ & Espacios, reuniones, actas, votación, videoconferencia y conocimiento. & Respuesta Plataform@ 90 min.\\
+07/10 & Repaso activo & Recuperar de memoria los temas 1--23; corregir lagunas. & Fichas de errores.\\\bottomrule
+\end{tabularx}\end{center}
+
+\subsection{Semana 3: seguridad, datos y planificación}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{l l Y Y}\toprule
+\textbf{Fecha} & \textbf{Tema} & \textbf{Trabajo principal} & \textbf{Salida obligatoria}\\\midrule
+08/10 & Seguridad avanzada & ENS, RBAC/ABAC, MFA, auditoría, continuidad y DPIA. & Dos matrices de impacto.\\
+09/10 & Datos y transparencia & Gobierno, lakehouse, BI, publicación, anonimización e IA. & Proyecto de datos por supuesto.\\
+10/10 & MVP y cronograma & Priorización, dependencias, riesgos, pruebas y despliegue. & Tres MVP comparados.\\
+11/10 & Recursos y contratación & Equipos, metodología, configuración y presupuesto. & Plan de proyecto completo.\\
+12/10 & Simulacro 1 & Resolver un supuesto completo en tiempo limitado. & Documento corregido con rúbrica.\\
+13/10 & Corrección 1 & Reescribir introducción, diagramas, seguridad y cierre. & Plantilla personal definitiva.\\
+14/10 & Simulacro 2 & Resolver otro supuesto priorizando claridad y síntesis. & Segundo documento y lista de fallos.\\\bottomrule
+\end{tabularx}\end{center}
+
+\subsection{Recta final: 15 y 16 de octubre}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{l Y Y}\toprule
+\textbf{Fecha} & \textbf{Plan} & \textbf{No hacer}\\\midrule
+15/10 & Repaso de fichas, artículos, matrices, diagramas y frases de respuesta. Practicar introducción y conclusión. & No abrir temas nuevos ni leer documentación extensa.\\
+16/10 & Repaso ligero: flujos, actores, ENS, MVP, arquitectura y contratación. Descanso y preparación material. & No realizar un simulacro completo ni estudiar de madrugada.\\\bottomrule
+\end{tabularx}\end{center}
+
+\section{Rúbrica personal de evaluación}
+
+Después de cada simulacro, puntuar de 0 a 2 cada criterio:
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l c Y}\toprule
+\textbf{Criterio} & \textbf{Puntuación} & \textbf{Pregunta de control}\\\midrule
+Cobertura & 0--2 & ¿He respondido todos los apartados?\\
+Modelo funcional & 0--2 & ¿Se entienden actores, procesos, datos y límites?\\
+Arquitectura & 0--2 & ¿He justificado integración, tecnología y alternativas?\\
+Seguridad & 0--2 & ¿He tratado ENS, privacidad, acceso, continuidad y auditoría?\\
+Implantación & 0--2 & ¿El MVP, cronograma y recursos son realizables?\\
+Datos e innovación & 0--2 & ¿Aporto valor sin olvidar legalidad y riesgos?\\
+Expresión & 0--2 & ¿La respuesta es ordenada, legible y ejecutiva?\\
+\bottomrule\end{tabularx}\end{center}
+
+\boxnote{\key{Objetivo mínimo antes del 15 de octubre}: poder dibujar de memoria una arquitectura lógica, una física y un flujo de proceso; explicar ENS/RGPD; proponer un MVP; y redactar en menos de tres horas una respuesta completa, numerada y justificada.}
+
+\section{Checklist final}
+\begin{itemize}
+\item ¿He identificado actores y responsabilidades?
+\item ¿He distinguido información, operación, control y publicación?
+\item ¿He definido datos maestros, documentos, histórico y auditoría?
+\item ¿He explicado APIs, eventos, colas, errores e idempotencia?
+\item ¿He justificado CPD, nube o híbrida con requisitos?
+\item ¿He categorizado seguridad por dimensiones y no solo citado ENS?
+\item ¿He separado autenticación, autorización y ámbito?
+\item ¿He incluido protección de datos, accesibilidad y transparencia?
+\item ¿He concretado MVP, cronograma, equipos y costes?
+\item ¿He incluido operación, continuidad, soporte y reversibilidad?
+\item ¿He reservado espacio a innovación responsable y sus riesgos?
+\item ¿La conclusión responde al problema institucional inicial?
+\end{itemize}
+
+\section{Resumen de una página}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,node distance=5mm]
+\tikzset{b/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=4cm,minimum height=9mm},a/.style={-stealth,thick,blue}}
+\node[b] (p) {1. Problema, alcance y actores};
+\node[b,below=of p] (d) {2. Dominios, procesos, datos y documentos};
+\node[b,below=of d] (i) {3. Integración, arquitectura lógica y física};
+\node[b,below=of i] (s) {4. ENS, RGPD, identidad, acceso y trazabilidad};
+\node[b,below=of s] (m) {5. MVP, cronograma, recursos y contratación};
+\node[b,below=of m] (v) {6. Datos, transparencia, innovación y conclusión};
+\draw[a] (p)--(d)--(i)--(s)--(m)--(v);
+\end{tikzpicture}
+\end{center}
+
+La respuesta excelente mantiene coherencia entre el problema, el modelo funcional, la arquitectura, la seguridad y la implantación. No gana la propuesta con más tecnología, sino la que mejor demuestra criterio de Administración pública digital.
+
+\end{document}

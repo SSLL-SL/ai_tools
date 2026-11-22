@@ -1,0 +1,63 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Cómo utilizar esta guía}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Método de respuesta}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Temario I. Marco jurídico y Administración digital}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}1. Organización administrativa y cooperación}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}2. Procedimiento administrativo electrónico}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}3. Transparencia, reutilización y accesibilidad}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}4. Interoperabilidad}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}5. Firma, identidad y archivo}{4}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Temario II. Dominio presupuestario y financiero}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}6. Ciclo presupuestario}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}7. Clasificación y datos presupuestarios}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}8. Ejecución del gasto}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}9. Contratación pública}{4}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}10. Contabilidad, control y tesorería}{5}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Temario III. Pensiones y Plataforma Digital Común}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}11. Modelo funcional de la PDC}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}12. Dominios PDC}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}13. Modelo de autorización PDC}{5}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Temario IV. Cooperación y Plataform@}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}14. Modelo de espacios}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}15. Reuniones y documentos}{5}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}16. Votación y delegación}{6}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}17. Videoconferencia}{6}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}18. Conocimiento jurídico y cooperación}{6}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Temario V. Arquitectura de sistemas y aplicaciones}{6}{section.6}%
+\contentsline {subsection}{\numberline {6.1}19. Arquitectura lógica}{6}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}20. Arquitecturas de aplicación}{6}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}21. Integración}{6}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}22. Gestión documental}{6}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}23. Interfaz y experiencia}{6}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Temario VI. Infraestructura, nube y operación}{7}{section.7}%
+\contentsline {subsection}{\numberline {7.1}24. Arquitectura física}{7}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}25. Nube frente a CPD}{7}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}26. Dimensionamiento}{7}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}27. DevSecOps y operación}{7}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Temario VII. Seguridad, ENS y protección de datos}{7}{section.8}%
+\contentsline {subsection}{\numberline {8.1}28. Dimensiones y categorización ENS}{7}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}29. RGPD y privacidad}{7}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}30. Control de acceso}{7}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}31. Medidas técnicas y organizativas}{7}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Temario VIII. Datos, transparencia e innovación}{8}{section.9}%
+\contentsline {subsection}{\numberline {9.1}32. Gobierno del dato}{8}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}33. Analítica y cuadros de mando}{8}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}34. Transparencia y datos abiertos}{8}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}35. Inteligencia artificial responsable}{8}{subsection.9.4}%
+\contentsline {section}{\numberline {10}Temario IX. Planificación, recursos y contratación}{8}{section.10}%
+\contentsline {subsection}{\numberline {10.1}36. Cronograma y MVP}{8}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}37. Recursos}{8}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}38. Contratación pública TIC}{8}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}39. Estimación económica}{9}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Técnica para redactar en el examen}{9}{section.11}%
+\contentsline {subsection}{\numberline {11.1}40. Esqueleto de respuesta}{9}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}41. Frases de alto rendimiento}{9}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}42. Errores que restan puntos}{9}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Calendario de estudio: 24 de septiembre--16 de octubre}{9}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Semana 1: base jurídica y modelo de respuesta}{10}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Semana 2: dominios y arquitectura}{10}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Semana 3: seguridad, datos y planificación}{11}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Recta final: 15 y 16 de octubre}{11}{subsection.12.4}%
+\contentsline {section}{\numberline {13}Rúbrica personal de evaluación}{11}{section.13}%
+\contentsline {section}{\numberline {14}Checklist final}{12}{section.14}%
+\contentsline {section}{\numberline {15}Resumen de una página}{12}{section.15}%

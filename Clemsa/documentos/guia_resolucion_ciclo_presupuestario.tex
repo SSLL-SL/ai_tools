@@ -1,0 +1,411 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\spanishdeactivate{<>}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+\geometry{margin=2.2cm,headheight=14pt}
+\definecolor{navy}{HTML}{17324D}
+\definecolor{blue}{HTML}{246B9F}
+\definecolor{lightblue}{HTML}{EAF3F8}
+\definecolor{lightgray}{HTML}{F3F5F7}
+\definecolor{darkgray}{HTML}{46515C}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=blue,pdftitle={Guía de resolución: ciclo presupuestario},pdfauthor={}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{darkgray}{Guía de resolución}}
+\rhead{\textcolor{darkgray}{Ciclo presupuestario}}
+\cfoot{\thepage}
+\titleformat{\section}{\Large\bfseries\color{navy}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{blue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{navy}}{\thesubsubsection}{0.6em}{}
+\setlist[itemize]{leftmargin=1.3em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+\newcommand{\key}[1]{\textbf{\textcolor{navy}{#1}}}
+\newcommand{\boxnote}[1]{\begin{center}\fcolorbox{blue}{lightblue}{\parbox{0.92\textwidth}{#1}}\end{center}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Large\textcolor{darkgray}{PREPARACIÓN DE OPOSICIONES}}\\[1.2cm]
+{\Huge\bfseries\textcolor{navy}{Diseño de un sistema para la gestión del ciclo presupuestario}}\\[1cm]
+{\Large Guía de resolución del supuesto práctico}\\[2cm]
+\begin{tikzpicture}
+  \node[draw=blue,rounded corners=8pt,fill=lightblue,inner sep=16pt,text width=9cm,align=center] {\large
+  Modelo institucional + arquitectura de sistemas +\\[2pt]
+  tecnología + seguridad + planificación + transparencia};
+\end{tikzpicture}
+\vfill
+\begin{minipage}{0.82\textwidth}
+\small\centering
+Material de estudio elaborado a partir del enunciado del segundo ejercicio.\\
+La solución debe adaptarse siempre al marco jurídico del Estado supuesto.
+\end{minipage}
+\vspace{1cm}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Cómo abordar el ejercicio}
+
+La respuesta no debe describir únicamente una aplicación de presupuestos. Hay que presentar una \key{solución integral de Administración digital}, conectando presupuesto, contratación, gasto, contabilidad, fiscalización, tesorería, auditoría, transparencia y participación ciudadana.
+
+Las tres ideas que deben aparecer durante todo el ejercicio son:
+\begin{itemize}
+\item \key{Trazabilidad completa}: cada crédito se sigue desde la planificación hasta el pago y la rendición de cuentas.
+\item \key{Separación de funciones}: quien propone el gasto no debe ser quien lo fiscaliza, contabiliza o paga.
+\item \key{Implantación incremental}: el sistema debe permitir elaborar el presupuesto de 2027 durante 2026, aunque no esté terminada toda la solución.
+\end{itemize}
+
+\subsection{Distribución del tiempo}
+\begin{center}
+\begin{tabularx}{0.9\textwidth}{l r Y}
+\toprule
+\textbf{Bloque} & \textbf{Tiempo} & \textbf{Objetivo}\\
+\midrule
+Lectura y esquema & 15 min & Identificar restricciones, actores, fechas y decisiones arquitectónicas.\\
+Modelo lógico & 65 min & Dominios, arquitectura de sistemas y diagramas.\\
+Solución tecnológica & 40 min & Arquitectura física, nube y tecnologías.\\
+Seguridad & 25 min & Normativa, impacto y medidas.\\
+Planificación y recursos & 45 min & Cronograma 2026--2027 y equipos.\\
+Transparencia e innovación & 35 min & Portal, datos abiertos y participación.\\
+Revisión & 15 min & Completar diagramas, referencias y conclusión.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+La respuesta debe seguir exactamente los apartados del enunciado. Los diagramas conviene plantearlos desde el principio, no dejarlos para los últimos minutos.
+
+\section{Modelo lógico}
+
+\subsection{Dominios y subdominios funcionales}
+
+\subsubsection{1. Planificación fiscal y plurianual}
+Responsabilidad de la DGPP. Incluye escenarios económicos a tres años, objetivos de déficit y deuda, límite de gasto no financiero, compromisos plurianuales, simulaciones y propuesta para Gobierno y Parlamento.
+
+\subsubsection{2. Elaboración y aprobación presupuestaria}
+Incluye directrices, estructuras orgánica, funcional o por programas y económica, propuestas de los órganos gestores, consolidación ministerial por los OCP, revisión de la DGPP, memorias y disposiciones legales, aprobación gubernamental, tramitación parlamentaria, enmiendas, prórroga y distribución de créditos.
+
+\subsubsection{3. Gestión de estructuras y créditos}
+Maestro común de ministerios, órganos gestores, centros de gasto, programas, aplicaciones presupuestarias, capítulos, conceptos económicos, fuentes de financiación y ejercicios. Es crítico porque todos los módulos deben usar la misma clasificación.
+
+\subsubsection{4. Ejecución presupuestaria}
+Gestiona expediente, retención de crédito, autorización, compromiso o disposición, reconocimiento de la obligación, propuesta y ordenación del pago, pago, anulaciones, devoluciones, reintegros y cierre. Debe validar secuencia, importes y disponibilidad.
+
+\subsubsection{5. Contratación pública}
+Plan anual, expediente, pliegos, certificado de crédito, autorización, licitación, ofertas, valoración, propuesta, fiscalización, adjudicación, firma, ejecución, modificación, prórroga y liquidación.
+
+\subsubsection{6. Contabilidad pública}
+Documentos contables, contabilidad presupuestaria y financiera, libro mayor, conciliación, cierre, liquidación y Cuenta General.
+
+\subsubsection{7. Fiscalización y control interno}
+Fiscalización previa, control financiero permanente, comprobación material de inversiones, auditorías financieras, de cumplimiento y operativas, reparos y recomendaciones.
+
+\subsubsection{8. Tesorería y pagos}
+Obligaciones reconocidas, ordenación, selección y ejecución de pagos, confirmaciones, rechazos, devoluciones y conciliación bancaria.
+
+\subsubsection{9. Seguimiento y evaluación}
+Ejecución por ministerio, programa y aplicación; comparación entre presupuesto inicial, modificado, comprometido, obligado y pagado; indicadores y alertas.
+
+\subsubsection{10. Rendición de cuentas, transparencia y participación}
+Portal de presupuestos abiertos, datos abiertos, publicación del proyecto y de la Ley, modificaciones, ejecución, consultas ciudadanas, participación, preguntas parlamentarias y solicitudes del Tribunal.
+
+\subsection{Arquitectura de sistemas}
+
+La opción equilibrada es una \key{plataforma modular integrada}, con módulos funcionales separados, datos maestros comunes y una capa de integración.
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, node distance=5mm and 7mm]
+\tikzset{actor/.style={draw=navy,fill=lightgray,rounded corners,align=center,minimum height=7mm}, app/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=3.0cm,minimum height=8mm}, infra/.style={draw=darkgray,fill=white,rounded corners,align=center,text width=4.2cm,minimum height=8mm}, arrow/.style={-stealth,thick,blue}}
+\node[actor] (cit) {Ciudadanía};
+\node[actor,right=of cit] (par) {Parlamento};
+\node[actor,right=of par] (tsc) {TSC};
+\node[app,below=of cit,xshift=18mm] (portal) {Portal de transparencia y participación};
+\node[app,below=of portal] (budget) {Planificación y elaboración presupuestaria};
+\node[app,right=of budget] (exec) {Expedientes de gasto y créditos};
+\node[app,right=of exec] (contract) {Contratación pública};
+\node[app,below=of exec] (account) {Contabilidad y tesorería};
+\node[app,left=of account] (audit) {Fiscalización y auditoría};
+\node[app,right=of account] (report) {Seguimiento, BI y rendición};
+\node[infra,below=of account] (data) {Datos maestros · documentos · auditoría · DWH};
+\node[infra,below=of data] (services) {Identidad · firma · notificaciones · archivo};
+\draw[arrow] (cit)--(portal);
+\draw[arrow] (par)--(portal);
+\draw[arrow] (tsc)--(portal);
+\draw[arrow] (portal)--(budget);
+\draw[arrow] (budget)--(exec);
+\draw[arrow] (exec)--(contract);
+\draw[arrow] (exec)--(account);
+\draw[arrow] (audit)--(exec);
+\draw[arrow] (account)--(report);
+\draw[arrow] (budget)--(data);
+\draw[arrow] (exec)--(data);
+\draw[arrow] (contract)--(data);
+\draw[arrow] (data)--(services);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Límites funcionales}
+\begin{itemize}
+\item \key{Presupuestos}: planifica, elabora, consolida y modifica créditos.
+\item \key{Gastos}: tramita el expediente administrativo y las fases presupuestarias.
+\item \key{Contratación}: gestiona licitación y contrato.
+\item \key{Contabilidad}: registra hechos contables y genera estados.
+\item \key{Fiscalización}: valida, repara, audita y conserva evidencias.
+\item \key{Tesorería}: ejecuta el pago, sin modificar el expediente de gasto.
+\item \key{Portal público}: expone información autorizada y anonimizada, sin acceso directo a bases operacionales.
+\end{itemize}
+
+\subsubsection{Integraciones}
+Contratación se integra con gasto porque la adjudicación genera el compromiso; gasto con contabilidad porque cada fase produce un documento contable; contabilidad con tesorería porque la obligación genera la orden de pago; fiscalización bloquea los hitos sujetos a control; y el portal público consume datos consolidados, no las bases internas.
+
+Los mecanismos son APIs REST, mensajería y eventos, ETL para explotación, esquemas versionados e identificador único de expediente que conecte presupuesto, contrato, documentos contables, facturas y pago.
+
+\subsection{Arquitecturas de las aplicaciones}
+
+Se propone una arquitectura modular de servicios, no un microservicio por función. La solución incluirá aplicaciones web internas, portal público separado, backend modular por dominios, motor de workflow, gestión documental, base transaccional, almacén analítico, bus de integración e identidad federada.
+
+\boxnote{\key{Criterio}: comenzar con un monolito modular o servicios de dominio, evolucionando a microservicios solo cuando existan necesidades reales de escalabilidad, autonomía o aislamiento. Así se evita introducir complejidad innecesaria.}
+
+Patrones importantes:
+\begin{itemize}
+\item Máquina de estados para expediente, contrato y gasto.
+\item Workflow configurable para aprobaciones y fiscalización.
+\item RBAC/ABAC para controlar rol, órgano, ministerio e importe.
+\item Auditoría inmutable, versionado y trazabilidad extremo a extremo.
+\item Idempotencia en pagos e integraciones.
+\item Transacciones para reservar, liberar y consumir crédito.
+\end{itemize}
+
+Entidades principales: presupuesto, escenario, crédito, aplicación presupuestaria, expediente de gasto, documento contable, contrato, licitación, oferta, proveedor, factura, fiscalización, auditoría, obligación, orden de pago, pago e informe.
+
+\subsection{Proceso de contratación}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, node distance=4mm]
+\tikzset{boxstep/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=6.2cm,minimum height=8mm}, decision/.style={diamond,draw=navy,fill=lightgray,align=center,aspect=2,text width=2.1cm}, arrow/.style={-stealth,thick,blue}}
+\node[boxstep] (s1) {Unidad solicitante / OG: plan anual y memoria de necesidad};
+\node[boxstep,below=of s1] (s2) {OG: pliegos técnicos y administrativos};
+\node[boxstep,below=of s2] (s3) {OC: certificado y reserva de crédito};
+\node[boxstep,below=of s3] (s4) {Autoridad: aprobación del expediente y autorización del gasto};
+\node[boxstep,below=of s4] (s5) {UC: publicación de licitación y recepción electrónica de ofertas};
+\node[boxstep,below=of s5] (s6) {UC / mesa: admisión, valoración y clasificación};
+\node[boxstep,below=of s6] (s7) {Propuesta de adjudicación};
+\node[boxstep,below=of s7] (s8) {ODF: fiscalización previa};
+\node[decision,right=of s8] (d) {¿Favorable?};
+\node[boxstep,below=of s8] (s9) {Órgano de contratación: resolución, notificación y publicación};
+\node[boxstep,below=of s9] (s10) {Firma del contrato y compromiso del gasto};
+\draw[arrow] (s1)--(s2)--(s3)--(s4)--(s5)--(s6)--(s7)--(s8);
+\draw[arrow] (s8)--(s9);
+\draw[arrow] (d)--node[above]{sí}(s9);
+\draw[arrow] (d.east)--++(12mm,0)|-node[pos=.25,right]{no: subsanación}(s7.east);
+\draw[arrow] (s9)--(s10);
+\end{tikzpicture}
+\end{center}
+
+\section{Solución tecnológica}
+
+\subsection{Arquitectura física}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, node distance=5mm]
+\tikzset{layer/.style={draw=blue,fill=lightblue,rounded corners,align=center,text width=10cm,minimum height=9mm}, arrow/.style={-stealth,thick,blue}}
+\node[layer] (u) {Usuarios y proveedores};
+\node[layer,below=of u] (edge) {CDN / WAF / balanceadores / DMZ};
+\node[layer,below=of edge] (app) {Presentación interna / portal público / APIs};
+\node[layer,below=of app] (svc) {Servicios de aplicación / workflow / integración};
+\node[layer,below=of svc] (db) {Bases transaccionales / documentos / archivo};
+\node[layer,below=of db] (bi) {DWH / BI / datos abiertos};
+\draw[arrow] (u)--(edge)--(app)--(svc)--(db)--(bi);
+\end{tikzpicture}
+\end{center}
+
+Entornos separados: desarrollo, integración, pruebas, preproducción, producción y recuperación ante desastres. No deben compartir credenciales, datos reales ni permisos.
+
+\subsection{Nube o infraestructura propia}
+
+Se recomienda una nube pública o soberana de carácter híbrido, con datos y servicios críticos bajo control del Estado.
+
+\textbf{Ventajas de la nube}: puesta en marcha rápida, menor inversión inicial, escalabilidad en elaboración y cierres, alta disponibilidad y servicios gestionados.
+
+\textbf{Condiciones}: residencia y control de datos, cifrado y claves, portabilidad, acuerdos de nivel de servicio, derecho de auditoría, salida ordenada, cumplimiento del ENS y protección de datos y reducción de dependencia del proveedor.
+
+\subsection{Tecnologías orientativas}
+
+Linux y contenedores; plataforma de orquestación si existe madurez; base relacional para operaciones financieras; almacenamiento de objetos para documentos; búsqueda; API Gateway; mensajería; firma y gestión documental; CI/CD; infraestructura como código; monitorización; DWH y cuadros de mando.
+
+La elección se justifica por consistencia transaccional, disponibilidad, auditabilidad, interoperabilidad, portabilidad, mantenibilidad y coste total de propiedad, no por la marca concreta del producto.
+
+\section{Seguridad}
+
+\subsection{Normativa de referencia}
+\begin{itemize}
+\item RGPD, Reglamento (UE) 2016/679, y Ley Orgánica 3/2018.
+\item Reglamento eIDAS, Reglamento (UE) 910/2014.
+\item Directiva NIS2, Directiva (UE) 2022/2555.
+\item Directiva 2011/85/UE y Reglamento (UE) 2024/1263 sobre marcos presupuestarios y gobernanza económica.
+\item Directivas europeas de contratación pública.
+\item Ley 47/2003, General Presupuestaria, como referencia española.
+\item Ley 9/2017, de Contratos del Sector Público.
+\item Leyes 39/2015 y 40/2015.
+\item Ley 19/2013, de transparencia.
+\item Real Decreto 311/2022, ENS, y Real Decreto 4/2010, ENI.
+\item Reglamento de IA cuando se incorporen sistemas de inteligencia artificial.
+\end{itemize}
+
+El nuevo Estado debe adaptar estas referencias a su ordenamiento propio; el sistema debe ser configurable para absorber cambios normativos.
+
+\subsection{Impacto en las dimensiones de seguridad}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l l Y}
+\toprule
+\textbf{Dimensión} & \textbf{Impacto} & \textbf{Justificación}\\
+\midrule
+Confidencialidad & Alto & Datos personales, ofertas, cuentas bancarias e informes reservados.\\
+Integridad & Muy alto & Alteraciones podrían permitir gasto indebido, fraude o modificación de créditos.\\
+Disponibilidad & Alto & Elaboración, ejecución y pagos no pueden detenerse en momentos críticos.\\
+Autenticidad & Muy alto & Debe identificarse a gestores, fiscalizadores, proveedores y autoridades.\\
+Trazabilidad & Muy alto & Hay que reconstruir quién hizo qué, cuándo y con qué documento.\\
+No repudio & Alto & Actos, adjudicaciones, informes y órdenes de pago deben quedar firmados.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Medidas}
+\begin{itemize}
+\item Gobierno: responsables de seguridad, sistema e información; DPD; comité; riesgos; auditorías e incidentes.
+\item Acceso: identidad centralizada, MFA, mínimo privilegio, RBAC/ABAC, segregación de funciones y revisión periódica.
+\item Información: cifrado, firma, sellado de tiempo, clasificación, anonimización, control de versiones y copias protegidas.
+\item Seguridad técnica: segmentación, WAF, bastionado, EDR, parcheado, SAST/DAST, análisis de dependencias, SIEM y pruebas de penetración.
+\item Continuidad: RTO/RPO, alta disponibilidad, replicación, sitio alternativo, pruebas de restauración y operación manual de contingencia.
+\end{itemize}
+
+La separación de funciones debe quedar reflejada en el sistema: el OG propone, la ODF fiscaliza, la autoridad autoriza, el OC contabiliza y Tesorería paga.
+
+\section{Planificación}
+
+\subsection{Cronograma 2026--2027}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{l Y Y}
+\toprule
+\textbf{Periodo} & \textbf{Entregables principales} & \textbf{Prioridad}\\
+\midrule
+1T 2026 & Gobierno, requisitos, procesos, datos maestros, análisis jurídico, arquitectura y seguridad. & Fundaciones y dependencias.\\
+2T 2026 & Usuarios y roles, estructuras, escenarios, límite de gasto, directrices, captura y consolidación. & Elaboración del presupuesto 2027.\\
+3T 2026 & Memorias, disposiciones, documentos, aprobaciones, expediente parlamentario, enmiendas y publicación. & Fecha legal no desplazable.\\
+4T 2026 & Ley definitiva, prórroga de contingencia, distribución de créditos, ejecución, contratación, fiscalización y pruebas. & Apertura del ejercicio.\\
+1T 2027 & Producción de ejecución, pagos, soporte reforzado, incidencias e informes. & Continuidad operativa.\\
+Resto de 2027 & Modificaciones, auditoría, informes, transparencia avanzada, liquidación y Cuenta General. & Control y mejora.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+La priorización responde a dependencias funcionales, riesgo institucional y económico, fechas legales, disponibilidad de datos maestros y capacidad de prueba. El núcleo mínimo de 2026 es elaboración, workflow, documentos, publicación, identidad y auditoría. Para enero de 2027 se añaden gasto, crédito, contabilidad, fiscalización, contratación básica, facturas, obligaciones, pagos y Tesorería.
+
+\subsection{Recursos}
+
+\textbf{Gobierno}: comité director, dirección del proyecto, oficina de proyecto, responsables funcionales, seguridad, protección de datos y arquitectura empresarial.
+
+\textbf{Equipos funcionales}: presupuesto, ejecución y contabilidad, contratación, fiscalización, tesorería, transparencia y gestión documental.
+
+\textbf{Equipos técnicos}: arquitectura, backend/frontend, datos, integración, DevOps, seguridad, QA, UX, accesibilidad, explotación y soporte.
+
+\textbf{Metodología}: modelo híbrido; gobierno por hitos y desarrollo iterativo con Scrum o Kanban, DevSecOps, entregas frecuentes, pruebas automatizadas, demostraciones, gestión de cambios y formación progresiva. No conviene defender un Agile puro sin controles para un sistema crítico sujeto a ley, contratación, auditoría y fechas obligatorias.
+
+\textbf{Herramientas y servicios}: repositorio de código, gestión de requisitos e incidencias, CI/CD, artefactos, infraestructura como código, observabilidad, identidad, firma, sellado de tiempo, archivo, notificaciones, factura electrónica, copias, SOC y mesa de ayuda.
+
+\section{Mejoras e innovación}
+
+\subsection{Portal de presupuestos abiertos}
+Publicará presupuesto inicial y modificado, ejecución, obligaciones y pagos, contratos vinculados, programas, objetivos, liquidación y Cuenta General. Debe ofrecer datos abiertos, API pública, formatos reutilizables, metadatos, diccionario de datos, licencia y versiones.
+
+\subsection{Visualización comprensible}
+El ciudadano debe poder saber cuánto se gasta, en qué, quién gestiona, qué objetivo se persigue, qué proveedor recibe el pago cuando sea publicable y qué porcentaje está comprometido, obligado y pagado. Se pueden usar gráficos, filtros, mapas, explicaciones en lenguaje claro y un presupuesto ciudadano resumido.
+
+\subsection{Participación ciudadana}
+Consulta previa, foros temáticos, propuestas, priorización, respuesta motivada, seguimiento y presupuestos participativos para partidas seleccionadas. La participación no permite modificar directamente el presupuesto: la decisión corresponde a los órganos competentes, pero cada aportación debe quedar registrada, clasificada y respondida.
+
+\subsection{Transparencia activa}
+Publicación automática de hitos, modificaciones presupuestarias, contratación, ejecución, alertas de desviaciones, objetivos, preguntas parlamentarias y respuestas, y recomendaciones de control, protegiendo la información reservada.
+
+\subsection{Analítica e inteligencia artificial}
+Aplicaciones posibles: detección de desviaciones, predicción de tesorería, duplicidades, concentración de proveedores, fraccionamiento aparente, clasificación documental y asistentes de búsqueda normativa. La IA no sustituye decisiones administrativas, debe ser explicable, auditable, supervisada y conforme con protección de datos y normativa de IA.
+
+\subsection{Indicadores}
+Porcentaje publicado en datos abiertos, tiempo de publicación, accesos y reutilizaciones, propuestas ciudadanas, respuestas, tiempo de respuesta, ejecución de programas, incidencias y reducción de tiempos administrativos.
+
+\section{Segunda parte: análisis pormenorizado}
+
+Esta parte debe dirigirse a altos cargos y no repetir mecánicamente la solución técnica.
+
+\subsection{Sumario ejecutivo}
+
+Se propone una plataforma nacional integrada para gestionar el ciclo presupuestario completo, desde la planificación plurianual hasta la rendición de cuentas. La solución se organiza en módulos de presupuesto, ejecución, contratación, contabilidad, fiscalización, tesorería y transparencia, conectados mediante identidad, documentos, datos maestros e integración. Se prioriza poner en servicio durante 2026 el núcleo que permita elaborar el presupuesto de 2027 y durante enero de 2027 las capacidades necesarias para ejecutarlo. La arquitectura será modular, interoperable, segura y desplegada preferentemente en nube soberana o híbrida.
+
+\subsection{Marco jurídico}
+
+Debe exponerse por materias:
+\begin{itemize}
+\item \key{Presupuesto y estabilidad}: Constitución Española, artículo 134; Ley General Presupuestaria; normativa europea de gobernanza económica.
+\item \key{Procedimiento}: Leyes 39/2015 y 40/2015; identificación, firma, expediente y archivo electrónico.
+\item \key{Contratación}: Ley 9/2017 y directivas europeas; publicidad, concurrencia, igualdad, integridad y eficiencia.
+\item \key{Transparencia y datos}: Ley 19/2013, RGPD y Ley Orgánica 3/2018, con límites por seguridad, datos y secreto comercial.
+\item \key{Administración digital y seguridad}: ENS, ENI, eIDAS, NIS2, archivo y factura electrónica.
+\end{itemize}
+
+\subsection{Formas de ejecutar el gasto público}
+
+\subsubsection{Contratos públicos}
+Procedimientos abierto, restringido, negociado cuando esté justificado, contrato menor dentro de sus límites, emergencia en situaciones excepcionales, acuerdos marco, sistemas dinámicos, centrales de contratación, obras, suministros, servicios y concesiones. Deben respetarse necesidad, crédito, publicidad, concurrencia, igualdad, criterios objetivos, integridad, fiscalización y seguimiento.
+
+\subsubsection{Subvenciones y ayudas}
+Concurrencia competitiva o concesión directa cuando proceda. Exigen bases, convocatoria, criterios objetivos, resolución, justificación, control financiero y reintegro si corresponde.
+
+\subsubsection{Personal}
+Retribuciones, cuotas, indemnizaciones, formación y acción social, con dotación presupuestaria, control de plazas, fiscalización, registro y controles de nómina.
+
+\subsubsection{Transferencias y aportaciones}
+Requieren base jurídica, finalidad, beneficiario, justificación, control del destino y registro contable.
+
+\subsubsection{Encargos a medios propios y gestión directa}
+Exigen justificar la elección, formalizar el encargo, presupuestar, controlar resultados y rendir cuentas, aunque no sean un contrato público ordinario.
+
+\subsubsection{Gastos financieros}
+Intereses, amortización, comisiones y operaciones de tesorería, con control de límites, autorización, contabilidad y conciliación.
+
+\subsubsection{Anticipos, pagos a justificar y caja fija}
+Mecanismos sujetos a límites, autorización, justificación posterior, arqueos, conciliación y reintegro.
+
+\subsubsection{Emergencia}
+Debe limitarse a acontecimientos excepcionales y urgentes. Exige justificación, delimitación del gasto imprescindible, control posterior, publicidad y rendición de cuentas; nunca debe usarse para eludir la concurrencia ordinaria.
+
+\section{Ideas de cierre para el examen}
+
+La respuesta debe seguir este flujo:
+\begin{center}
+\Large\bfseries\color{navy}
+Planificación $\rightarrow$ Elaboración $\rightarrow$ Aprobación $\rightarrow$ Distribución $\rightarrow$ Expediente $\rightarrow$ Contratación $\rightarrow$ Fiscalización $\rightarrow$ Contabilización $\rightarrow$ Obligación $\rightarrow$ Pago $\rightarrow$ Seguimiento $\rightarrow$ Auditoría $\rightarrow$ Transparencia $\rightarrow$ Rendición
+\end{center}
+
+Para cada etapa hay que identificar actor responsable, módulo, documento generado, control, integración y evidencia registrada. El error más frecuente es centrarse en tecnologías concretas y olvidar el modelo institucional. La solución de mayor calidad es integral, segura, auditable, interoperable, implantable y jurídicamente coherente.
+
+\end{document}

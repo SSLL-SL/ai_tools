@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS4 FPKG Collection</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f; color: #e0e0e0; padding: 20px;
+        }
+        .layout { display: flex; gap: 20px; align-items: flex-start; }
+        .main { flex: 1; min-width: 0; }
+        .sidebar {
+            width: 380px; flex-shrink: 0; background: #1a1a1a;
+            border: 1px solid #2a2a2a; border-radius: 12px; padding: 16px;
+            position: sticky; top: 20px; max-height: calc(100vh - 40px);
+            display: flex; flex-direction: column;
+        }
+        .sidebar h2 { font-size: 16px; color: #fff; margin-bottom: 12px; }
+        .queue-list { flex: 1; overflow-y: auto; min-height: 100px; }
+        .queue-empty { color: #555; font-size: 13px; text-align: center; padding: 30px 0; }
+        .queue-item {
+            padding: 10px; border-radius: 8px; margin-bottom: 8px;
+            background: #0f0f0f; border: 1px solid #2a2a2a;
+        }
+        .queue-item-name { font-size: 13px; font-weight: 500; color: #ddd; margin-bottom: 4px; word-break: break-all; }
+        .queue-item-status { font-size: 11px; margin-bottom: 6px; }
+        .queue-item-status.waiting { color: #888; }
+        .queue-item-status.downloading { color: #4a9eff; }
+        .queue-item-status.paused { color: #ff9800; }
+        .queue-item-status.completed { color: #4caf50; }
+        .queue-item-status.failed { color: #f44336; }
+        .progress-bar { height: 4px; background: #2a2a2a; border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #4a9eff; border-radius: 2px; transition: width 0.5s; }
+        .progress-fill.completed { background: #4caf50; }
+        .progress-fill.paused { background: #ff9800; }
+        .progress-fill.failed { background: #f44336; }
+        .queue-item-size { font-size: 10px; color: #666; margin-top: 2px; }
+        .queue-item-actions { margin-top: 8px; display: flex; gap: 4px; flex-wrap: wrap; }
+        .queue-btn {
+            padding: 4px 10px; border-radius: 4px; border: none; cursor: pointer;
+            font-size: 11px; font-weight: 500;
+        }
+        .queue-btn-pause { background: #ff9800; color: #fff; }
+        .queue-btn-pause:hover { background: #e68900; }
+        .queue-btn-resume { background: #4caf50; color: #fff; }
+        .queue-btn-resume:hover { background: #3d9140; }
+        .queue-btn-cancel { background: #f44336; color: #fff; }
+        .queue-btn-cancel:hover { background: #d32f2f; }
+        .queue-btn-retry { background: #4a9eff; color: #fff; }
+        .queue-btn-retry:hover { background: #3a8eef; }
+        .queue-actions { margin-top: 12px; display: flex; gap: 8px; }
+        .sidebar-section { margin-bottom: 16px; }
+        .config-dir { margin-bottom: 12px; }
+        .config-label { font-size: 12px; color: #888; display: block; margin-bottom: 6px; }
+        .config-dir-row { display: flex; gap: 6px; }
+        .config-input {
+            flex: 1; padding: 8px 10px; border: 1px solid #333; border-radius: 6px;
+            background: #0f0f0f; color: #ccc; font-size: 12px;
+        }
+        .config-input:focus { outline: none; border-color: #4a9eff; }
+        .btn-config {
+            padding: 8px 12px; border-radius: 6px; border: 1px solid #4a9eff;
+            background: transparent; color: #4a9eff; cursor: pointer; font-size: 12px; white-space: nowrap;
+        }
+        .btn-config:hover { background: #4a9eff; color: #fff; }
+        .btn-clear {
+            padding: 8px 16px; border-radius: 6px; border: 1px solid #333;
+            background: transparent; color: #888; cursor: pointer; font-size: 12px;
+        }
+        .btn-clear:hover { border-color: #f44336; color: #f44336; }
+
+        h1 { font-size: 24px; margin-bottom: 20px; color: #fff; }
+        .search-form { margin-bottom: 20px; display: flex; gap: 10px; }
+        .search-form input {
+            flex: 1; padding: 10px 16px; border: 1px solid #333;
+            border-radius: 8px; background: #1a1a1a; color: #e0e0e0; font-size: 14px;
+        }
+        .search-form input:focus { outline: none; border-color: #4a9eff; }
+        .search-form button {
+            padding: 10px 20px; background: #4a9eff; color: #fff;
+            border: none; border-radius: 8px; cursor: pointer; font-size: 14px;
+        }
+        .search-form button:hover { background: #3a8eef; }
+        .info { margin-bottom: 16px; color: #888; font-size: 14px; }
+        .sort-bar { margin-bottom: 16px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+        .sort-label { color: #888; }
+        .sort-btn {
+            padding: 6px 14px; border-radius: 6px; text-decoration: none;
+            color: #aaa; background: #1a1a1a; border: 1px solid #2a2a2a; font-size: 13px;
+        }
+        .sort-btn:hover { border-color: #4a9eff; color: #fff; }
+        .sort-btn.active { background: #4a9eff; color: #fff; border-color: #4a9eff; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px;
+            overflow: hidden; transition: transform 0.1s, border-color 0.1s;
+        }
+        .card:hover { transform: translateY(-2px); border-color: #4a9eff; }
+        .card-cover {
+            width: 100%; aspect-ratio: 3/4; object-fit: cover;
+            background: #2a2a2a; display: block;
+        }
+        .card-body { padding: 14px; }
+        .card-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .card-meta { font-size: 12px; color: #888; line-height: 1.6; }
+        .card-meta span { color: #aaa; }
+        .card-actions { margin-top: 12px; display: flex; gap: 8px; }
+        .btn {
+            flex: 1; padding: 8px 12px; border-radius: 6px; font-size: 13px;
+            text-align: center; text-decoration: none; cursor: pointer;
+            border: none; font-weight: 500;
+        }
+        .btn-download { background: #4a9eff; color: #fff; }
+        .btn-download:hover { background: #3a8eef; }
+        .btn-download:disabled { background: #2a5a8f; color: #666; cursor: default; }
+        .btn-added { background: #2a5a8f; color: #888; }
+        .btn-cover { background: #2a2a2a; color: #aaa; }
+        .btn-cover:hover { background: #3a3a3a; color: #fff; }
+        .pagination {
+            display: flex; justify-content: center; align-items: center;
+            gap: 8px; margin-top: 30px; flex-wrap: wrap;
+        }
+        .pagination a, .pagination span {
+            padding: 8px 14px; border-radius: 6px; font-size: 14px;
+            text-decoration: none; color: #aaa; background: #1a1a1a; border: 1px solid #2a2a2a;
+        }
+        .pagination a:hover { border-color: #4a9eff; color: #fff; }
+        .pagination .active { background: #4a9eff; color: #fff; border-color: #4a9eff; }
+        .no-results { text-align: center; padding: 60px; color: #555; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <div class="main">
+            <h1>PS4 FPKG Collection</h1>
+            <form class="search-form" method="GET" action="/">
+                <input type="text" name="search" placeholder="Buscar por nombre, title ID o región..." value="{{ search }}">
+                <input type="hidden" name="sort_by" value="{{ sort_by }}">
+                <input type="hidden" name="sort_order" value="{{ sort_order }}">
+                <button type="submit">Buscar</button>
+            </form>
+            <div class="info">
+                Mostrando {{ games|length }} de {{ total }} juegos
+                {% if search %} (filtrado por "{{ search }}"){% endif %}
+            </div>
+            <div class="sort-bar">
+                <span class="sort-label">Ordenar:</span>
+                <a class="sort-btn {% if sort_by == 'name' %}active{% endif %}"
+                   href="?sort_by=name&sort_order={% if sort_by == 'name' and sort_order == 'asc' %}desc{% else %}asc{% endif %}&search={{ search }}&page=1">
+                    Nombre {% if sort_by == 'name' %}{{ '▲' if sort_order == 'asc' else '▼' }}{% endif %}
+                </a>
+                <a class="sort-btn {% if sort_by == 'size' %}active{% endif %}"
+                   href="?sort_by=size&sort_order={% if sort_by == 'size' and sort_order == 'asc' %}desc{% else %}asc{% endif %}&search={{ search }}&page=1">
+                    Tamaño {% if sort_by == 'size' %}{{ '▲' if sort_order == 'asc' else '▼' }}{% endif %}
+                </a>
+            </div>
+            {% if games %}
+            <div class="grid">
+                {% for game in games %}
+                <div class="card" data-url="{{ game.url }}" data-name="{{ game.name }}">
+                    <img class="card-cover"
+                         src="{{ game.cover_url }}"
+                         alt="{{ game.name }}"
+                         loading="lazy"
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22><rect fill=%22%232a2a2a%22 width=%22300%22 height=%22400%22/><text fill=%22%23555%22 x=%22150%22 y=%22200%22 text-anchor=%22middle%22 dy=%22.3em%22>Sin imagen</text></svg>'">
+                    <div class="card-body">
+                        <div class="card-title">{{ game.name }}</div>
+                        <div class="card-meta">
+                            <span>Title ID:</span> {{ game.title_id }}<br>
+                            <span>Región:</span> {{ game.region }}<br>
+                            <span>Versión:</span> {{ game.version }}<br>
+                            <span>Tamaño:</span> {{ game.size_str }}<br>
+                            <span>FW mínimo:</span> {{ game.min_fw }}<br>
+                            <span>Lanzamiento:</span> {{ game.release }}
+                        </div>
+                        <div class="card-actions">
+                            {% if game.name in downloaded_names %}
+                <button class="btn btn-download" disabled style="background:#1b5e20;color:#a5d6a7;cursor:default;">✓ Descargado</button>
+                {% elif game.name in partial_names %}
+                <button class="btn btn-download" onclick="addToQueue(this)">Reanudar</button>
+                {% else %}
+                <button class="btn btn-download" onclick="addToQueue(this)">Añadir a cola</button>
+                {% endif %}
+                            <a class="btn btn-cover" href="{{ game.cover_url }}" target="_blank">Cover</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="pagination">
+                {% set qs = "&search=" + search + "&sort_by=" + sort_by + "&sort_order=" + sort_order %}
+                {% if page > 1 %}
+                    <a href="?page=1{{ qs }}">&laquo;</a>
+                    <a href="?page={{ page - 1 }}{{ qs }}">&lsaquo;</a>
+                {% endif %}
+                {% set start_page = [1, page - 2]|max %}
+                {% set end_page = [total_pages, page + 2]|min %}
+                {% if start_page > 1 %}
+                    <span>...</span>
+                {% endif %}
+                {% for p in range(start_page, end_page + 1) %}
+                    {% if p == page %}
+                        <span class="active">{{ p }}</span>
+                    {% else %}
+                        <a href="?page={{ p }}{{ qs }}">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if end_page < total_pages %}
+                    <span>...</span>
+                {% endif %}
+                {% if page < total_pages %}
+                    <a href="?page={{ page + 1 }}{{ qs }}">&rsaquo;</a>
+                    <a href="?page={{ total_pages }}{{ qs }}">&raquo;</a>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="no-results">No se encontraron juegos</div>
+            {% endif %}
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h2>Configuración</h2>
+                <div class="config-dir">
+                    <label class="config-label">Directorio de descarga</label>
+                    <div class="config-dir-row">
+                        <input class="config-input" type="text" id="download-dir" value="">
+                        <button class="btn-config" onclick="browseDir()">📁</button>
+                        <button class="btn-config" onclick="updateDir()">Cambiar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-section" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+                <h2>Cola de descargas</h2>
+                <div class="queue-list" id="queue-list">
+                    <div class="queue-empty">Sin descargas activas</div>
+                </div>
+                <div class="queue-actions">
+                    <button class="btn-clear" onclick="clearCompleted()">Limpiar completados</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addToQueue(btn) {
+            var card = btn.closest('.card');
+            var url = card.dataset.url;
+            var name = card.dataset.name;
+            btn.disabled = true;
+            btn.textContent = 'Añadido...';
+            btn.classList.add('btn-added');
+            fetch('/api/queue/add', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({url: url, name: name})
+            }).then(function(r) { return r.json(); }).then(function(entry) {
+                btn.textContent = 'En cola';
+                pollQueue();
+            });
+        }
+
+        function pollQueue() {
+            fetch('/api/queue')
+                .then(function(r) { return r.json(); })
+                .then(renderQueue)
+                .catch(function() {});
+        }
+
+        function renderQueue(queue) {
+            var container = document.getElementById('queue-list');
+            if (!queue.length) {
+                container.innerHTML = '<div class="queue-empty">Sin descargas activas</div>';
+                return;
+            }
+            var html = '';
+            queue.forEach(function(entry) {
+                var statusText = {
+                    'waiting': 'Esperando...',
+                    'downloading': 'Descargando...',
+                    'paused': 'Pausado',
+                    'completed': 'Completado',
+                    'failed': 'Error'
+                }[entry.status] || entry.status;
+
+                var sizeText = '';
+                if (entry.total_bytes) {
+                    var mb = (entry.total_bytes / (1024*1024)).toFixed(1);
+                    var downloadedMb = (entry.downloaded_bytes / (1024*1024)).toFixed(1);
+                    sizeText = downloadedMb + ' MB / ' + mb + ' MB';
+                } else if (entry.downloaded_bytes) {
+                    sizeText = (entry.downloaded_bytes / (1024*1024)).toFixed(1) + ' MB';
+                }
+
+                html += '<div class="queue-item">';
+                html += '<div class="queue-item-name">' + escapeHtml(entry.name) + '</div>';
+                html += '<div class="queue-item-status ' + entry.status + '">' + statusText + '</div>';
+                html += '<div class="progress-bar"><div class="progress-fill ' + entry.status + '" style="width:' + entry.progress + '%"></div></div>';
+                if (sizeText) {
+                    html += '<div class="queue-item-size">' + sizeText + '</div>';
+                }
+                if (entry.error) {
+                    html += '<div class="queue-item-size" style="color:#f44336">' + escapeHtml(entry.error) + '</div>';
+                }
+                html += '<div class="queue-item-actions">';
+                if (entry.status === 'downloading') {
+                    html += '<button class="queue-btn queue-btn-pause" onclick="queueAction(\'pause\',\'' + entry.id + '\')">Pausar</button>';
+                    html += '<button class="queue-btn queue-btn-cancel" onclick="queueAction(\'cancel\',\'' + entry.id + '\')">Cancelar</button>';
+                } else if (entry.status === 'paused') {
+                    html += '<button class="queue-btn queue-btn-resume" onclick="queueAction(\'resume\',\'' + entry.id + '\')">Reanudar</button>';
+                    html += '<button class="queue-btn queue-btn-cancel" onclick="queueAction(\'cancel\',\'' + entry.id + '\')">Cancelar</button>';
+                } else if (entry.status === 'failed') {
+                    html += '<button class="queue-btn queue-btn-retry" onclick="queueAction(\'retry\',\'' + entry.id + '\')">Reintentar</button>';
+                    html += '<button class="queue-btn queue-btn-cancel" onclick="queueAction(\'cancel\',\'' + entry.id + '\')">Cancelar</button>';
+                } else if (entry.status === 'waiting') {
+                    html += '<button class="queue-btn queue-btn-cancel" onclick="queueAction(\'cancel\',\'' + entry.id + '\')">Cancelar</button>';
+                }
+                html += '</div>';
+                html += '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        function queueAction(action, id) {
+            fetch('/api/queue/' + action, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({id: id})
+            }).then(function() { pollQueue(); });
+        }
+
+        function clearCompleted() {
+            fetch('/api/queue/clear', {method: 'POST'})
+                .then(function() { pollQueue(); });
+        }
+
+        function escapeHtml(text) {
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function loadConfig() {
+            fetch('/api/config')
+                .then(function(r) { return r.json(); })
+                .then(function(cfg) {
+                    document.getElementById('download-dir').value = cfg.download_dir;
+                });
+        }
+
+        function browseDir() {
+            fetch('/api/select-directory')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.path) {
+                        document.getElementById('download-dir').value = data.path;
+                        updateDirFromValue();
+                    }
+                })
+                .catch(function() {});
+        }
+
+        function updateDir() {
+            updateDirFromValue();
+        }
+
+        function updateDirFromValue() {
+            var dir = document.getElementById('download-dir').value.trim();
+            if (!dir) return;
+            fetch('/api/config', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({download_dir: dir})
+            }).then(function(r) { return r.json(); }).then(function(cfg) {
+                document.getElementById('download-dir').value = cfg.download_dir;
+            });
+        }
+
+        loadConfig();
+        setInterval(pollQueue, 2000);
+        pollQueue();
+    </script>
+</body>
+</html>

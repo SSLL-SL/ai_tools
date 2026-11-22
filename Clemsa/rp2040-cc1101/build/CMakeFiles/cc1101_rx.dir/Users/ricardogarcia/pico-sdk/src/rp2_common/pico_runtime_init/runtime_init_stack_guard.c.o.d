@@ -1,0 +1,39 @@
+CMakeFiles/cc1101_rx.dir/Users/ricardogarcia/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_stack_guard.c.o: \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_stack_guard.c \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h \
+ /Users/ricardogarcia/pico-sdk/src/common/pico_base_headers/include/pico.h \
+ /Users/ricardogarcia/pico-sdk/src/common/pico_base_headers/include/pico/types.h \
+ /Users/ricardogarcia/pico-sdk/src/common/pico_base_headers/include/pico/assert.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/lib/gcc/arm-none-eabi/15.3.1/include/stdbool.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/assert.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/_ansi.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/newlib.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/_newlib_version.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/sys/config.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/machine/ieeefp.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/sys/features.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/lib/gcc/arm-none-eabi/15.3.1/include/stdint.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/stdint.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/machine/_default_types.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/sys/_intsup.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/sys/_stdint.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/lib/gcc/arm-none-eabi/15.3.1/include/stddef.h \
+ /Users/ricardogarcia/Documents/New\ OpenCode\ Project/rp2040-cc1101/build/generated/pico_base/pico/version.h \
+ /Users/ricardogarcia/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
+ /Users/ricardogarcia/Documents/New\ OpenCode\ Project/rp2040-cc1101/build/generated/pico_base/pico/config_autogen.h \
+ /Users/ricardogarcia/pico-sdk/src/boards/include/boards/pico.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2040/pico_platform/include/pico/platform.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+ /Users/ricardogarcia/arm-gnu-toolchain/arm-none-eabi/include/sys/cdefs.h \
+ /Users/ricardogarcia/pico-sdk/src/common/pico_base_headers/include/pico/types.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/pico_platform_common/include/pico/platform/common.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+ /Users/ricardogarcia/pico-sdk/src/common/pico_base_headers/include/pico/error.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/mpu.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
+ /Users/ricardogarcia/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h

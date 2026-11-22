@@ -1,0 +1,51 @@
+[package]
+name = "bittorrent-cli"
+version = "0.1.0"
+edition = "2021"
+description = "Cliente BitTorrent de consola con DHT, PEX, reanudacion y helper HTTP para Chrome (port de rutracker-magnet-tools)"
+license = "MIT"
+
+[lib]
+name = "bittorrent_cli"
+path = "src/lib.rs"
+
+[[bin]]
+name = "btclient"
+path = "src/bin/btclient.rs"
+
+[[bin]]
+name = "magnet-to-torrent"
+path = "src/bin/magnet_to_torrent.rs"
+
+[[bin]]
+name = "torrent-helper"
+path = "src/bin/torrent_helper.rs"
+
+[[bin]]
+name = "extract-magnets"
+path = "src/bin/extract_magnets.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "charset", "http2", "cookies"] }
+log = "0.4"
+env_logger = "0.11"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+sha1 = "0.10"
+hmac = "0.12"
+rand = "0.8"
+base64 = "0.22"
+data-encoding = "2"
+thiserror = "1"
+axum = "0.7"
+hex = "0.4"
+html-escape = "0.2"
+regex = "1"
+url = "2"
+percent-encoding = "2"
+futures = "0.3"
+
+[profile.release]
+opt-level = 3

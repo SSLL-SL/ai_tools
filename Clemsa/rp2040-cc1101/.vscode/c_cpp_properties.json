@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "RP2040",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:HOME}/pico-sdk/src/**",
+                "${env:HOME}/pico-sdk/lib/**",
+                "${workspaceFolder}/build/pico-sdk/**",
+                "${workspaceFolder}/build/generated/**"
+            ],
+            "defines": [
+                "PICO_BOARD=pico",
+                "PICO_STDIO_USB=1",
+                "PICO_NO_BITWISE_TYPE_FLAGS=1",
+                "PICO_RP2040=1"
+            ],
+            "compilerPath": "${env:HOME}/arm-gnu-toolchain/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "${env:HOME}/pico-sdk/src",
+                    "${env:HOME}/pico-sdk/lib"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,80 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build: TX + RX",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "-j8"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build: TX solo",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--target",
+                "cc1101_tx",
+                "-j8"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build: RX solo",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--target",
+                "cc1101_rx",
+                "-j8"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Flash: TX (picotool)",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/_deps/picotool/picotool",
+            "args": [
+                "load",
+                "-f",
+                "${workspaceFolder}/build/cc1101_tx.uf2"
+            ],
+            "dependsOn": "Build: TX solo",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash: RX (picotool)",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/_deps/picotool/picotool",
+            "args": [
+                "load",
+                "-f",
+                "${workspaceFolder}/build/cc1101_rx.uf2"
+            ],
+            "dependsOn": "Build: RX solo",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

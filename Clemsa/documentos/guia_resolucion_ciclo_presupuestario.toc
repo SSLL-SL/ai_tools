@@ -1,0 +1,51 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Cómo abordar el ejercicio}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Distribución del tiempo}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Modelo lógico}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Dominios y subdominios funcionales}{3}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}1. Planificación fiscal y plurianual}{3}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}2. Elaboración y aprobación presupuestaria}{3}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}3. Gestión de estructuras y créditos}{3}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}4. Ejecución presupuestaria}{4}{subsubsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.5}5. Contratación pública}{4}{subsubsection.2.1.5}%
+\contentsline {subsubsection}{\numberline {2.1.6}6. Contabilidad pública}{4}{subsubsection.2.1.6}%
+\contentsline {subsubsection}{\numberline {2.1.7}7. Fiscalización y control interno}{4}{subsubsection.2.1.7}%
+\contentsline {subsubsection}{\numberline {2.1.8}8. Tesorería y pagos}{4}{subsubsection.2.1.8}%
+\contentsline {subsubsection}{\numberline {2.1.9}9. Seguimiento y evaluación}{4}{subsubsection.2.1.9}%
+\contentsline {subsubsection}{\numberline {2.1.10}10. Rendición de cuentas, transparencia y participación}{4}{subsubsection.2.1.10}%
+\contentsline {subsection}{\numberline {2.2}Arquitectura de sistemas}{4}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Límites funcionales}{5}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Integraciones}{5}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Arquitecturas de las aplicaciones}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Proceso de contratación}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Solución tecnológica}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Arquitectura física}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Nube o infraestructura propia}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Tecnologías orientativas}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Seguridad}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Normativa de referencia}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Impacto en las dimensiones de seguridad}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Medidas}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Planificación}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Cronograma 2026--2027}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Recursos}{9}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Mejoras e innovación}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Portal de presupuestos abiertos}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Visualización comprensible}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Participación ciudadana}{10}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Transparencia activa}{10}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Analítica e inteligencia artificial}{10}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Indicadores}{10}{subsection.6.6}%
+\contentsline {section}{\numberline {7}Segunda parte: análisis pormenorizado}{10}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Sumario ejecutivo}{10}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Marco jurídico}{10}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Formas de ejecutar el gasto público}{11}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Contratos públicos}{11}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Subvenciones y ayudas}{11}{subsubsection.7.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.3}Personal}{11}{subsubsection.7.3.3}%
+\contentsline {subsubsection}{\numberline {7.3.4}Transferencias y aportaciones}{11}{subsubsection.7.3.4}%
+\contentsline {subsubsection}{\numberline {7.3.5}Encargos a medios propios y gestión directa}{11}{subsubsection.7.3.5}%
+\contentsline {subsubsection}{\numberline {7.3.6}Gastos financieros}{11}{subsubsection.7.3.6}%
+\contentsline {subsubsection}{\numberline {7.3.7}Anticipos, pagos a justificar y caja fija}{11}{subsubsection.7.3.7}%
+\contentsline {subsubsection}{\numberline {7.3.8}Emergencia}{11}{subsubsection.7.3.8}%
+\contentsline {section}{\numberline {8}Ideas de cierre para el examen}{12}{section.8}%
